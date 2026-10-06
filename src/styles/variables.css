@@ -1,0 +1,46 @@
+:root {
+  /* Gospelova Brand */
+  --color-primary: #32105c;
+  --color-primary-light: #5b2a86;
+  --color-primary-dark: #22083f;
+
+  --color-gold: #d4af37;
+  --color-gold-light: #e4c65a;
+  --color-gold-dark: #a8871f;
+
+  /* Backgrounds */
+  --color-white: #ffffff;
+  --color-background: #f8f7fa;
+  --color-surface: #ffffff;
+  --color-surface-dark: #17131c;
+
+  /* Text */
+  --color-text: #17131c;
+  --color-text-muted: #6f6877;
+  --color-text-light: #ffffff;
+
+  /* Borders */
+  --color-border: #e7e3eb;
+
+  /* Status */
+  --color-success: #16803c;
+  --color-error: #c62828;
+  --color-warning: #c47b00;
+
+  /* Layout */
+  --container-width: 1200px;
+  --page-padding: 1.25rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}

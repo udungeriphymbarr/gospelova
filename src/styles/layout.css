@@ -1,0 +1,482 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar__inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.navbar__logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__logo-main {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-gold);
+}
+
+.navbar__logo-tagline {
+  font-size: 0.6rem;
+  opacity: 0.75;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar__nav a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.navbar__nav a:hover {
+  color: var(--color-gold);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar__menu-button {
+  display: none;
+
+  border: 0;
+  background: transparent;
+  color: var(--color-white);
+
+  font-size: 1.5rem;
+  line-height: 1;
+
+  padding: 0.25rem;
+}
+
+.navbar__mobile {
+  display: none;
+}
+
+.navbar__search {
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+.home {
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary-dark),
+      var(--color-primary)
+    );
+
+  color: var(--color-white);
+}
+
+.home__content {
+  padding-block: 5rem;
+}
+
+.home__eyebrow {
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.home h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+}
+
+.home__description {
+  max-width: 620px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+}
+
+.home__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding-inline: 1.5rem;
+
+  border-radius: var(--radius-md);
+
+  font-weight: 700;
+
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+}
+
+.button--secondary {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  background: var(--color-surface-dark);
+  color: var(--color-white);
+}
+
+.footer__inner {
+  padding-block: 3rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__brand h2 {
+  color: var(--color-gold);
+}
+
+.footer__brand p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer__links a:hover {
+  color: var(--color-gold);
+}
+
+.footer__bottom {
+  padding-block: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .navbar__inner {
+    min-height: 68px;
+  }
+
+  .navbar__nav--desktop {
+    display: none;
+  }
+
+  .navbar__search {
+    display: none;
+  }
+
+  .navbar__menu-button {
+    display: block;
+  }
+
+  .navbar__mobile {
+    display: flex;
+
+    flex-direction: column;
+
+    max-height: 0;
+    overflow: hidden;
+
+    background: var(--color-primary-dark);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition:
+      max-height 250ms ease,
+      padding 250ms ease;
+  }
+
+  .navbar__mobile--open {
+    max-height: 400px;
+    padding: 0.75rem 0 1rem;
+  }
+
+  .navbar__mobile a {
+    padding: 0.85rem var(--page-padding);
+
+    color: var(--color-white);
+
+    font-weight: 600;
+
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .navbar__mobile a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-gold);
+  }
+
+  .home {
+    min-height: 560px;
+  }
+
+  .home h1 {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .footer__inner {
+    flex-direction: column;
+  }
+}
+
+.section-heading {
+  margin-bottom: 2rem;
+}
+
+.section-heading__eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--color-gold-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-heading__title {
+  color: var(--color-primary-dark);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.section-heading__description {
+  max-width: 650px;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.song-card {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.song-card__image-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.song-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-card__play {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+
+  width: 44px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  box-shadow: var(--shadow-md);
+}
+
+.song-card__content {
+  padding: 1rem;
+}
+
+.song-card__title {
+  overflow: hidden;
+
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.song-card__artist {
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.artist-card {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.artist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.artist-card__image-wrapper {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.artist-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-card__content {
+  padding: 1rem;
+}
+
+.artist-card__name {
+  color: var(--color-text);
+  font-size: 1.05rem;
+}
+
+.artist-card__label {
+  margin-top: 0.2rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.category-card {
+  display: block;
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-white);
+  transition:
+    transform var(--transition-normal),
+    background var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.category-card__content {
+  padding: 1.5rem;
+}
+
+.category-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1rem;
+
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.category-card__name {
+  font-size: 1.2rem;
+}
+
+.category-card__description {
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+
+.category-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-gold-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+}

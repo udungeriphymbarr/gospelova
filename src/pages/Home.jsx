@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 import SectionHeading from "../components/SectionHeading";
 import SongCard from "../components/SongCard";
@@ -6,14 +8,44 @@ import ArtistCard from "../components/ArtistCard";
 import CategoryCard from "../components/CategoryCard";
 import BlogCard from "../components/BlogCard";
 
-import {
-  latestSongs,
-  popularArtists,
-  categories,
-  latestNews,
-} from "../utils/homeData";
+import { popularArtists, categories, latestNews } from "../utils/homeData";
 
 function Home() {
+  const [latestSongs, setLatestSongs] = useState([]);
+  const [songsLoading, setSongsLoading] = useState(true);
+  const [songsError, setSongsError] = useState("");
+
+  useEffect(() => {
+    async function fetchLatestSongs() {
+      const { data, error } = await supabase
+        .from("songs")
+        .select(
+          `
+          id,
+          title,
+          slug,
+          cover_image_path,
+          audio_path,
+          artists ( name )
+        `,
+        )
+        .eq("is_published", true)
+        .order("created_at", { ascending: false })
+        .limit(4);
+
+      if (error) {
+        console.error("Error fetching homepage songs:", error);
+        setSongsError("We couldn't load the latest songs.");
+      } else {
+        setLatestSongs(data ?? []);
+      }
+
+      setSongsLoading(false);
+    }
+
+    fetchLatestSongs();
+  }, []);
+
   return (
     <div className="home">
       {/* Hero */}
@@ -55,17 +87,36 @@ function Home() {
             description="Discover the latest songs added to Gospelova."
           />
 
-          <div className="song-grid">
-            {latestSongs.map((song) => (
-              <SongCard
-                key={song.id}
-                title={song.title}
-                artist={song.artist}
-                image={song.image}
-                audioUrl={song.audioUrl}
-              />
-            ))}
-          </div>
+          {songsLoading && <p>Loading latest gospel songs...</p>}
+
+          {songsError && <p role="alert">{songsError}</p>}
+
+          {!songsLoading && !songsError && latestSongs.length === 0 && (
+            <p>No songs have been published yet. Check back soon!</p>
+          )}
+
+          {!songsLoading && !songsError && latestSongs.length > 0 && (
+            <div className="song-grid">
+              {latestSongs.map((song) => {
+                const coverUrl = song.cover_image_path
+                  ? supabase.storage
+                      .from("song-cover")
+                      .getPublicUrl(song.cover_image_path).data.publicUrl
+                  : null;
+
+                return (
+                  <SongCard
+                    key={song.id}
+                    title={song.title}
+                    artist={song.artists?.name ?? "Unknown artist"}
+                    image={coverUrl}
+                    audioUrl={song.audio_path}
+                    slug={song.slug}
+                  />
+                );
+              })}
+            </div>
+          )}
 
           <div className="home__section-action">
             <Link to="/music" className="button button--outline">

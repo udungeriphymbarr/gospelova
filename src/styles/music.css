@@ -1,0 +1,206 @@
+
+/* ========================================
+   GOSPELOVA MUSIC PAGE
+======================================== */
+
+.music-page {
+  padding: 56px 0 80px;
+  min-height: 70vh;
+}
+
+.music-page__header {
+  margin-bottom: 36px;
+}
+
+.music-page__eyebrow {
+  color: var(--color-gold, #c9a448);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.music-page__title {
+  color: var(--color-purple, #32145b);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+  margin: 0 0 14px;
+}
+
+.music-page__description {
+  max-width: 620px;
+  color: #6d6577;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Song listing */
+
+.music-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.music-page__card {
+  min-width: 0;
+  overflow: hidden;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #eee8f5;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgb(42 20 70 / 5%);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.music-page__card:hover {
+  transform: translateY(-4px);
+  border-color: #d8c69a;
+  box-shadow: 0 14px 32px rgb(42 20 70 / 10%);
+}
+
+.music-page__cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.music-page__cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  background: linear-gradient(145deg, #32145b, #542c7c);
+  color: #e5c36c;
+  font-size: 4rem;
+}
+
+.music-page__category {
+  display: inline-block;
+  color: #765b1d;
+  background: #fbf4df;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.music-page__song-title {
+  color: #28153f;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.music-page__artist {
+  color: #706778;
+  font-size: 0.92rem;
+  margin: 0 0 10px;
+}
+
+.music-page__description {
+  color: #777080;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+
+.music-page__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.music-page__view-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #32145b;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+
+.music-page__view-link:hover {
+  background: #4a2478;
+}
+
+.music-page__status {
+  padding: 28px 20px;
+  border-radius: 12px;
+  background: #f8f5fb;
+  color: #62556f;
+  line-height: 1.7;
+}
+
+.music-page__status--error {
+  background: #fff1f0;
+  color: #a52a25;
+}
+
+/* Responsive layouts */
+
+@media (max-width: 900px) {
+  .music-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .music-page {
+    padding: 44px 0 64px;
+  }
+}
+
+@media (max-width: 560px) {
+  .music-page {
+    padding: 32px 0 48px;
+  }
+
+  .music-page__header {
+    margin-bottom: 26px;
+  }
+
+  .music-page__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .music-page__card {
+    padding: 14px;
+  }
+
+  .music-page__cover,
+  .music-page__cover-placeholder {
+    max-height: 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-page__card,
+  .music-page__view-link {
+    transition: none;
+  }
+
+  .music-page__card:hover {
+    transform: none;
+  }
+}

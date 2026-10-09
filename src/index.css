@@ -1,5 +1,6 @@
 @import "./styles/variables.css";
 @import "./styles/layout.css";
+@import "./styles/song.css";
 
 * {
   margin: 0;

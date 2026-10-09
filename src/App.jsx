@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Copyright from "./pages/Copyright";
+import SongDetails from "./pages/SongDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<Music />} />
           <Route path="/lyrics" element={<Lyrics />} />
+          <Route path="/music/:slug" element={<SongDetails />} />
           <Route path="/artists" element={<Artists />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/blog" element={<Blog />} />

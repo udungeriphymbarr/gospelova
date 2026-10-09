@@ -1,0 +1,337 @@
+/* ================================
+   SONG DETAILS
+================================ */
+
+.song-details {
+  padding: 3rem 0 5rem;
+}
+
+.song-details__back {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: color var(--transition-fast);
+}
+
+.song-details__back:hover {
+  color: var(--color-primary-light);
+}
+
+.song-details__header {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.song-details__cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: var(--color-primary);
+}
+
+.song-details__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-details__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  color: var(--color-gold-light);
+  font-size: 6rem;
+  font-weight: 700;
+}
+
+.song-details__info {
+  max-width: 650px;
+}
+
+.song-details__category {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--color-gold-dark);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.song-details__info h1 {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.song-details__artist {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.song-details__date {
+  margin-bottom: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.song-details__description {
+  max-width: 600px;
+  margin-bottom: 2rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.song-details__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.song-details__lyrics {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.song-details__lyrics h2 {
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-size: 1.75rem;
+}
+
+.song-details__lyrics-content {
+  white-space: pre-line;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 2;
+}
+
+
+/* ================================
+   SONG DETAILS — RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .song-details {
+    padding: 2rem 0 4rem;
+  }
+
+  .song-details__header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .song-details__cover {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .song-details__info {
+    max-width: none;
+  }
+
+  .song-details__info h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .song-details__actions {
+    width: 100%;
+  }
+
+  .song-details__actions .button {
+    flex: 1;
+  }
+
+  .song-details__lyrics {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .song-details__actions {
+    flex-direction: column;
+  }
+
+  .song-details__actions .button {
+    width: 100%;
+  }
+
+  .song-details__lyrics {
+    padding: 1.25rem;
+  }
+
+  .song-details__lyrics-content {
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+}
+
+/* ================================
+   AUDIO PLAYER
+================================ */
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.audio-player__play {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.audio-player__play:hover {
+  transform: scale(1.05);
+  background: var(--color-primary-light);
+}
+
+.audio-player__info {
+  min-width: 0;
+}
+
+.audio-player__label {
+  margin-bottom: 0.15rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.audio-player__title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ================================
+   AUDIO PLAYER — PROGRESS
+================================ */
+
+.audio-player__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.audio-player__progress {
+  margin-top: 0.75rem;
+}
+
+.audio-player__times {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.audio-player__track {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-border);
+}
+
+.audio-player__progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-primary);
+  transition: width 100ms linear;
+}
+
+.audio-player__track {
+  cursor: pointer;
+}
+
+.audio-player__track:hover {
+  height: 7px;
+}
+
+
+/* AUDIO PLAYER — VOLUME */
+
+.audio-player__volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.audio-player__mute {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.audio-player__volume-slider {
+  width: 120px;
+  max-width: 100%;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .audio-player__volume-slider {
+    width: 100px;
+  }
+}

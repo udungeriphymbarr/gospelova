@@ -3,11 +3,11 @@
 ========================= */
 
 .navbar {
-  background: var(--color-primary-dark);
-  color: var(--color-white);
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
 }
 
 .navbar__inner {
@@ -24,9 +24,9 @@
 }
 
 .navbar__logo-main {
+  color: var(--color-gold);
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--color-gold);
 }
 
 .navbar__logo-tagline {
@@ -56,16 +56,20 @@
   gap: 0.75rem;
 }
 
-.navbar__menu-button {
-  display: none;
-
+.navbar__search {
   border: 0;
   background: transparent;
   color: var(--color-white);
+  font-size: 1.1rem;
+}
 
+.navbar__menu-button {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--color-white);
   font-size: 1.5rem;
   line-height: 1;
-
   padding: 0.25rem;
 }
 
@@ -73,63 +77,54 @@
   display: none;
 }
 
-.navbar__search {
-  border: 0;
-  background: transparent;
-  color: white;
-  font-size: 1.1rem;
-}
-
 
 /* =========================
-   HOME
+   HOME HERO
 ========================= */
 
-.home {
-  min-height: 620px;
+.home__hero {
   display: flex;
   align-items: center;
-
+  min-height: 620px;
   background:
     linear-gradient(
       135deg,
       var(--color-primary-dark),
       var(--color-primary)
     );
-
   color: var(--color-white);
 }
 
-.home__content {
+.home__hero-content {
   padding-block: 5rem;
 }
 
 .home__eyebrow {
-  color: var(--color-gold);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
   margin-bottom: 1rem;
+  color: var(--color-gold-light);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
 }
 
-.home h1 {
-  font-size: clamp(3rem, 7vw, 6rem);
-  line-height: 0.95;
+.home__hero h1 {
   max-width: 800px;
-  margin-bottom: 1.5rem;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
 }
 
 .home__description {
-  max-width: 620px;
+  max-width: 600px;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
-  opacity: 0.85;
-  margin-bottom: 2rem;
 }
 
 .home__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 
@@ -141,17 +136,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   min-height: 48px;
   padding-inline: 1.5rem;
-
   border-radius: var(--radius-md);
-
   font-weight: 700;
-
   transition:
     transform var(--transition-fast),
-    background var(--transition-fast);
+    background var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .button:hover {
@@ -163,9 +155,345 @@
   color: var(--color-primary-dark);
 }
 
+.button--primary:hover {
+  background: var(--color-gold-light);
+}
+
 .button--secondary {
   border: 1px solid rgba(255, 255, 255, 0.35);
   color: var(--color-white);
+}
+
+.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.button--outline {
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--outline:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+
+/* =========================
+   HOMEPAGE SECTIONS
+========================= */
+
+.home__section {
+  padding-block: 5rem;
+}
+
+.home__section--muted {
+  background: #f1eef5;
+}
+
+.home__section-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+
+/* =========================
+   SECTION HEADING
+========================= */
+
+.section-heading {
+  margin-bottom: 2rem;
+}
+
+.section-heading__eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--color-gold-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-heading__title {
+  color: var(--color-primary-dark);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.section-heading__description {
+  max-width: 650px;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+
+/* =========================
+   SONG GRID
+========================= */
+
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+
+/* =========================
+   SONG CARD
+========================= */
+
+.song-card {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.song-card__image-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.song-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-card__play {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-md);
+}
+
+.song-card__content {
+  padding: 1rem;
+}
+
+.song-card__title {
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.song-card__artist {
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* =========================
+   SONG CARD ACTIONS
+========================= */
+
+.song-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.song-card__details {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.song-card__details:hover {
+  color: var(--color-primary-light);
+}
+
+.song-card__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1.1rem;
+  font-weight: 800;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.song-card__download:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-light);
+}
+
+/* =========================
+   ARTIST GRID
+========================= */
+
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+
+/* =========================
+   ARTIST CARD
+========================= */
+
+.artist-card {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.artist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.artist-card__image-wrapper {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.artist-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-card__content {
+  padding: 1rem;
+}
+
+.artist-card__name {
+  color: var(--color-text);
+  font-size: 1.05rem;
+}
+
+.artist-card__label {
+  margin-top: 0.2rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+
+/* =========================
+   CATEGORY GRID
+========================= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+
+/* =========================
+   CATEGORY CARD
+========================= */
+
+.category-card {
+  display: block;
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-white);
+  transition:
+    transform var(--transition-normal),
+    background var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.category-card__content {
+  padding: 1.5rem;
+}
+
+.category-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.category-card__name {
+  font-size: 1.2rem;
+}
+
+.category-card__description {
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+
+.category-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-gold-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+
+/* =========================
+   NEWS
+========================= */
+
+.home__news-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.home__news-placeholder p {
+  color: var(--color-text-muted);
 }
 
 
@@ -216,6 +544,20 @@
 
 
 /* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  .song-grid,
+  .artist-grid,
+  .category-grid,
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================
    MOBILE
 ========================= */
 
@@ -238,16 +580,11 @@
 
   .navbar__mobile {
     display: flex;
-
     flex-direction: column;
-
     max-height: 0;
     overflow: hidden;
-
     background: var(--color-primary-dark);
-
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-
     transition:
       max-height 250ms ease,
       padding 250ms ease;
@@ -260,11 +597,8 @@
 
   .navbar__mobile a {
     padding: 0.85rem var(--page-padding);
-
     color: var(--color-white);
-
     font-weight: 600;
-
     transition:
       background var(--transition-fast),
       color var(--transition-fast);
@@ -275,12 +609,25 @@
     color: var(--color-gold);
   }
 
-  .home {
+  .home__hero {
     min-height: 560px;
   }
 
-  .home h1 {
+  .home__hero-content {
+    padding-block: 4rem;
+  }
+
+  .home__hero h1 {
     font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .home__section {
+    padding-block: 3.5rem;
+  }
+
+  .home__news-placeholder {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .footer__inner {
@@ -288,195 +635,153 @@
   }
 }
 
-.section-heading {
-  margin-bottom: 2rem;
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .song-grid,
+  .artist-grid,
+  .category-grid,
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.section-heading__eyebrow {
-  margin-bottom: 0.5rem;
-  color: var(--color-gold-dark);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
+/* =========================
+   IMAGE PLACEHOLDERS
+========================= */
 
-.section-heading__title {
-  color: var(--color-primary-dark);
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  line-height: 1.15;
-}
-
-.section-heading__description {
-  max-width: 650px;
-  margin-top: 0.75rem;
-  color: var(--color-text-muted);
-  font-size: 1rem;
-}
-
-.song-card {
-  overflow: hidden;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition:
-    transform var(--transition-normal),
-    box-shadow var(--transition-normal);
-}
-
-.song-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.song-card__image-wrapper {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--color-primary-dark);
-}
-
-.song-card__image {
+.song-card__placeholder,
+.artist-card__placeholder {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.song-card__play {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-
-  width: 44px;
-  height: 44px;
-
-  border: 0;
-  border-radius: 50%;
-
-  background: var(--color-gold);
-  color: var(--color-primary-dark);
-
-  font-size: 1rem;
-  font-weight: 800;
-
-  box-shadow: var(--shadow-md);
-}
-
-.song-card__content {
-  padding: 1rem;
-}
-
-.song-card__title {
-  overflow: hidden;
-
-  color: var(--color-text);
-  font-size: 1.05rem;
-  line-height: 1.3;
-
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.song-card__artist {
-  margin-top: 0.25rem;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-}
-
-.artist-card {
-  overflow: hidden;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition:
-    transform var(--transition-normal),
-    box-shadow var(--transition-normal);
-}
-
-.artist-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.artist-card__image-wrapper {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--color-primary-dark);
-}
-
-.artist-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.artist-card__content {
-  padding: 1rem;
-}
-
-.artist-card__name {
-  color: var(--color-text);
-  font-size: 1.05rem;
-}
-
-.artist-card__label {
-  margin-top: 0.2rem;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-}
-
-.category-card {
-  display: block;
-  background: var(--color-primary);
-  border-radius: var(--radius-md);
-  color: var(--color-white);
-  transition:
-    transform var(--transition-normal),
-    background var(--transition-normal),
-    box-shadow var(--transition-normal);
-}
-
-.category-card:hover {
-  transform: translateY(-4px);
-  background: var(--color-primary-light);
-  box-shadow: var(--shadow-md);
-}
-
-.category-card__content {
-  padding: 1.5rem;
-}
-
-.category-card__icon {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary-dark),
+      var(--color-primary-light)
+    );
+  color: var(--color-gold);
+}
 
-  width: 42px;
-  height: 42px;
-  margin-bottom: 1rem;
-
-  border-radius: 50%;
-  background: var(--color-gold);
-  color: var(--color-primary-dark);
-
-  font-size: 1.25rem;
+.song-card__placeholder span {
+  font-size: 4rem;
   font-weight: 800;
 }
 
-.category-card__name {
-  font-size: 1.2rem;
+.artist-card__placeholder {
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-primary-dark)
+    );
 }
 
-.category-card__description {
-  margin-top: 0.5rem;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.9rem;
+.artist-card__placeholder span {
+  font-size: 4rem;
+  font-weight: 800;
 }
 
-.category-card__link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: var(--color-gold-light);
-  font-size: 0.85rem;
+/* =========================
+   BLOG GRID
+========================= */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+
+/* =========================
+   BLOG CARD
+========================= */
+
+.blog-card {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card__image-wrapper {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-primary-dark);
+}
+
+.blog-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary-dark),
+      var(--color-primary-light)
+    );
+  color: var(--color-gold);
+}
+
+.blog-card__placeholder span {
+  font-size: 3rem;
+}
+
+.blog-card__content {
+  padding: 1.25rem;
+}
+
+.blog-card__date {
+  color: var(--color-gold-dark);
+  font-size: 0.8rem;
   font-weight: 700;
 }
+
+.blog-card__title {
+  margin-top: 0.5rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.blog-card__excerpt {
+  margin-top: 0.6rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.blog-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.blog-card__link:hover {
+  color: var(--color-primary-light);
+}
+

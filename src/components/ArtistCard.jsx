@@ -2,7 +2,13 @@ function ArtistCard({ name, image }) {
   return (
     <article className="artist-card">
       <div className="artist-card__image-wrapper">
-        <img src={image} alt={name} className="artist-card__image" />
+        {image ? (
+          <img src={image} alt={name} className="artist-card__image" />
+        ) : (
+          <div className="artist-card__placeholder">
+            <span>♫</span>
+          </div>
+        )}
       </div>
 
       <div className="artist-card__content">

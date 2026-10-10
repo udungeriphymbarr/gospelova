@@ -722,3 +722,34 @@
     padding: 0.65rem;
   }
 }
+
+
+/* Make the entire song card clickable */
+.song-card {
+  position: relative;
+}
+
+.song-card__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.song-card__title-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Keep the play and download controls above the link overlay */
+.song-card__play,
+.song-card__download {
+  position: relative;
+  z-index: 2;
+}
+
+.song-card:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}

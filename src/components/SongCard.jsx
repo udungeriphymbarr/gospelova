@@ -26,7 +26,11 @@ function SongCard({ title, artist, image, slug, audioUrl }) {
       </div>
 
       <div className="song-card__content">
-        <h3 className="song-card__title">{title}</h3>
+        <h3 className="song-card__title">
+          <Link to={`/music/${slug}`} className="song-card__title-link">
+            {title}
+          </Link>
+        </h3>
 
         <p className="song-card__artist">{artist}</p>
 

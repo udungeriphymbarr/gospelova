@@ -786,6 +786,34 @@
 }
 
 
+/* Make the entire blog card clickable */
+.blog-card {
+  position: relative;
+}
+
+.blog-card__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-card__title-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.blog-card:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.blog-card__link {
+  position: static;
+}
+
+
 /* Compact blog cards on mobile */
 @media (max-width: 600px) {
   .blog-grid {

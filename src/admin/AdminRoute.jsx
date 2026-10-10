@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import SEO from "../components/SEO";
 
 function AdminRoute({ children }) {
   const [status, setStatus] = useState("checking");
@@ -53,7 +54,16 @@ function AdminRoute({ children }) {
     return <Navigate to="/admin/login" replace />;
   }
 
-  return children;
+  return (
+    <>
+      <SEO
+        title="Admin Dashboard"
+        description="Gospelova administration."
+        noIndex={true}
+      />
+      {children}
+    </>
+  );
 }
 
 export default AdminRoute;

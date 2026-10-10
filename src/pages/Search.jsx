@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/music.css";
+import SEO from "../components/SEO";
 
 function normalizeText(value = "") {
   return value
@@ -127,109 +128,118 @@ function Search() {
   }
 
   return (
-    <section className="music-page gospelova-search-page">
-      <div className="container">
-        <header className="music-page__header">
-          <p className="music-page__eyebrow">DISCOVER GOSPEL MUSIC</p>
+    <>
+      <SEO
+        title="Search Gospel Music"
+        description="Search Gospelova for gospel songs by title or artist. Discover gospel music, explore song details, and find music to download."
+        url="/search"
+        noIndex={true}
+      />
 
-          <h1 className="music-page__title">Search Gospelova</h1>
+      <section className="music-page gospelova-search-page">
+        <div className="container">
+          <header className="music-page__header">
+            <p className="music-page__eyebrow">DISCOVER GOSPEL MUSIC</p>
 
-          <p className="music-page__description">
-            Find your favourite gospel songs by title or artist. Even if you
-            make a small spelling mistake, we'll try to find a match.
-          </p>
-        </header>
+            <h1 className="music-page__title">Search Gospelova</h1>
 
-        <form className="gospelova-search-form" onSubmit={handleSearch}>
-          <input
-            type="search"
-            value={searchTerm}
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-              setError("");
-            }}
-            placeholder="Enter a song title or artist name..."
-            aria-label="Search songs or artists"
-          />
+            <p className="music-page__description">
+              Find your favourite gospel songs by title or artist. Even if you
+              make a small spelling mistake, we'll try to find a match.
+            </p>
+          </header>
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Searching..." : "Search"}
-          </button>
-        </form>
+          <form className="gospelova-search-form" onSubmit={handleSearch}>
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+                setError("");
+              }}
+              placeholder="Enter a song title or artist name..."
+              aria-label="Search songs or artists"
+            />
 
-        {error && (
-          <p className="music-page__status" role="alert">
-            {error}
-          </p>
-        )}
+            <button type="submit" disabled={loading}>
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </form>
 
-        {loading && (
-          <p className="music-page__status" role="status">
-            Searching Gospelova...
-          </p>
-        )}
+          {error && (
+            <p className="music-page__status" role="alert">
+              {error}
+            </p>
+          )}
 
-        {!loading && hasSearched && !error && (
-          <>
-            <h2 className="gospelova-search-results-title">
-              {results.length > 0
-                ? `${results.length} result${results.length === 1 ? "" : "s"} found`
-                : "No results found"}
-            </h2>
+          {loading && (
+            <p className="music-page__status" role="status">
+              Searching Gospelova...
+            </p>
+          )}
 
-            {results.length === 0 ? (
-              <div className="music-page__status">
-                We couldn't find a song or artist matching{" "}
-                <strong>{searchTerm}</strong>. Try another spelling or search
-                for a different artist.
-              </div>
-            ) : (
-              <div className="music-page__grid">
-                {results.map((song) => {
-                  const coverUrl = song.cover_image_path
-                    ? supabase.storage
-                        .from("song-cover")
-                        .getPublicUrl(song.cover_image_path).data.publicUrl
-                    : null;
+          {!loading && hasSearched && !error && (
+            <>
+              <h2 className="gospelova-search-results-title">
+                {results.length > 0
+                  ? `${results.length} result${results.length === 1 ? "" : "s"} found`
+                  : "No results found"}
+              </h2>
 
-                  return (
-                    <article className="music-page__card" key={song.id}>
-                      {coverUrl ? (
-                        <img
-                          className="music-page__cover"
-                          src={coverUrl}
-                          alt={`${song.title} cover`}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="music-page__cover music-page__cover-placeholder">
-                          ♪
+              {results.length === 0 ? (
+                <div className="music-page__status">
+                  We couldn't find a song or artist matching{" "}
+                  <strong>{searchTerm}</strong>. Try another spelling or search
+                  for a different artist.
+                </div>
+              ) : (
+                <div className="music-page__grid">
+                  {results.map((song) => {
+                    const coverUrl = song.cover_image_path
+                      ? supabase.storage
+                          .from("song-cover")
+                          .getPublicUrl(song.cover_image_path).data.publicUrl
+                      : null;
+
+                    return (
+                      <article className="music-page__card" key={song.id}>
+                        {coverUrl ? (
+                          <img
+                            className="music-page__cover"
+                            src={coverUrl}
+                            alt={`${song.title} cover`}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="music-page__cover music-page__cover-placeholder">
+                            ♪
+                          </div>
+                        )}
+
+                        <h3 className="music-page__song-title">{song.title}</h3>
+
+                        <p className="music-page__artist">
+                          {song.artists?.name || "Unknown artist"}
+                        </p>
+
+                        <div className="music-page__actions">
+                          <Link
+                            className="music-page__view-link"
+                            to={`/music/${song.slug}`}
+                          >
+                            View Song
+                          </Link>
                         </div>
-                      )}
-
-                      <h3 className="music-page__song-title">{song.title}</h3>
-
-                      <p className="music-page__artist">
-                        {song.artists?.name || "Unknown artist"}
-                      </p>
-
-                      <div className="music-page__actions">
-                        <Link
-                          className="music-page__view-link"
-                          to={`/music/${song.slug}`}
-                        >
-                          View Song
-                        </Link>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </section>
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 

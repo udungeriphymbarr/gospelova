@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/lyrics.css";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function Lyrics() {
   const [songs, setSongs] = useState([]);
@@ -73,137 +74,145 @@ function Lyrics() {
   }
 
   return (
-    <main className="lyrics-page">
-      <section className="lyrics-hero">
-        <div className="container">
-          <p className="lyrics-eyebrow">SING ALONG IN FAITH</p>
-          <h1>Gospel Song Lyrics</h1>
-          <p>
-            Find the words behind your favourite gospel songs and let the
-            message inspire you.
-          </p>
+    <>
+      <SEO
+        title="Gospel Song Lyrics"
+        description="Find gospel song lyrics, explore songs by title or artist, and sing along to inspiring gospel music on Gospelova."
+        url="/lyrics"
+      />
 
-          <label className="lyrics-search">
-            <span className="sr-only">Search by song or artist</span>
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search song title or artist..."
-            />
-          </label>
-        </div>
-      </section>
-
-      <section className="container lyrics-content">
-        <div className="lyrics-section-heading">
-          <div>
-            <h2>Explore Lyrics</h2>
+      <main className="lyrics-page">
+        <section className="lyrics-hero">
+          <div className="container">
+            <p className="lyrics-eyebrow">SING ALONG IN FAITH</p>
+            <h1>Gospel Song Lyrics</h1>
             <p>
-              {loading
-                ? "Finding published lyrics..."
-                : `${filteredSongs.length} ${
-                    filteredSongs.length === 1 ? "song" : "songs"
-                  } found`}
+              Find the words behind your favourite gospel songs and let the
+              message inspire you.
             </p>
+
+            <label className="lyrics-search">
+              <span className="sr-only">Search by song or artist</span>
+              <input
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Search song title or artist..."
+              />
+            </label>
           </div>
-        </div>
+        </section>
 
-        {loading && <LoadingState message="Loading gospel lyrics..." />}
-
-        {!loading && error && (
-          <div className="lyrics-feedback lyrics-error" role="alert">
-            <p>{error}</p>
-            <button type="button" onClick={() => window.location.reload()}>
-              Try again
-            </button>
+        <section className="container lyrics-content">
+          <div className="lyrics-section-heading">
+            <div>
+              <h2>Explore Lyrics</h2>
+              <p>
+                {loading
+                  ? "Finding published lyrics..."
+                  : `${filteredSongs.length} ${
+                      filteredSongs.length === 1 ? "song" : "songs"
+                    } found`}
+              </p>
+            </div>
           </div>
-        )}
 
-        {!loading && !error && filteredSongs.length === 0 && (
-          <div className="lyrics-feedback">
-            <h3>
-              {search.trim() ? "No matching lyrics" : "Lyrics coming soon"}
-            </h3>
-            <p>
-              {search.trim()
-                ? "Try another song title or artist name."
-                : "Published song lyrics will appear here when available."}
-            </p>
-          </div>
-        )}
+          {loading && <LoadingState message="Loading gospel lyrics..." />}
 
-        {!loading && !error && filteredSongs.length > 0 && (
-          <div className="lyrics-grid">
-            {filteredSongs.map((song) => {
-              const coverUrl = getCoverUrl(song.cover_image_path);
-              const isSelected = selectedSong?.id === song.id;
+          {!loading && error && (
+            <div className="lyrics-feedback lyrics-error" role="alert">
+              <p>{error}</p>
+              <button type="button" onClick={() => window.location.reload()}>
+                Try again
+              </button>
+            </div>
+          )}
 
-              return (
-                <article className="lyrics-card" key={song.id}>
-                  <div className="lyrics-card-top">
-                    {coverUrl ? (
-                      <img
-                        className="lyrics-cover"
-                        src={coverUrl}
-                        alt={`${song.title} cover`}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="lyrics-cover lyrics-cover-placeholder">
-                        ♪
+          {!loading && !error && filteredSongs.length === 0 && (
+            <div className="lyrics-feedback">
+              <h3>
+                {search.trim() ? "No matching lyrics" : "Lyrics coming soon"}
+              </h3>
+              <p>
+                {search.trim()
+                  ? "Try another song title or artist name."
+                  : "Published song lyrics will appear here when available."}
+              </p>
+            </div>
+          )}
+
+          {!loading && !error && filteredSongs.length > 0 && (
+            <div className="lyrics-grid">
+              {filteredSongs.map((song) => {
+                const coverUrl = getCoverUrl(song.cover_image_path);
+                const isSelected = selectedSong?.id === song.id;
+
+                return (
+                  <article className="lyrics-card" key={song.id}>
+                    <div className="lyrics-card-top">
+                      {coverUrl ? (
+                        <img
+                          className="lyrics-cover"
+                          src={coverUrl}
+                          alt={`${song.title} cover`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="lyrics-cover lyrics-cover-placeholder">
+                          ♪
+                        </div>
+                      )}
+
+                      <div className="lyrics-card-info">
+                        <h3>{song.title}</h3>
+                        <p>{song.artists?.name || "Gospel Artist"}</p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="lyrics-view-button"
+                      aria-expanded={isSelected}
+                      onClick={() => setSelectedSong(isSelected ? null : song)}
+                    >
+                      {isSelected ? "Hide Lyrics" : "Read Lyrics"}
+                    </button>
+
+                    {isSelected && (
+                      <div className="lyrics-full-text">
+                        <h4>{song.title} — Lyrics</h4>
+                        <div>{song.lyrics}</div>
+                        <button
+                          type="button"
+                          className="lyrics-copy-button"
+                          onClick={() => {
+                            if (navigator.clipboard?.writeText) {
+                              navigator.clipboard
+                                .writeText(song.lyrics)
+                                .catch(() => {
+                                  setError(
+                                    "Couldn't copy the lyrics. Please select and copy the text manually.",
+                                  );
+                                });
+                            } else {
+                              setError(
+                                "Copy isn't supported here. Please select and copy the lyrics manually.",
+                              );
+                            }
+                          }}
+                        >
+                          Copy Lyrics
+                        </button>
                       </div>
                     )}
-
-                    <div className="lyrics-card-info">
-                      <h3>{song.title}</h3>
-                      <p>{song.artists?.name || "Gospel Artist"}</p>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="lyrics-view-button"
-                    aria-expanded={isSelected}
-                    onClick={() => setSelectedSong(isSelected ? null : song)}
-                  >
-                    {isSelected ? "Hide Lyrics" : "Read Lyrics"}
-                  </button>
-
-                  {isSelected && (
-                    <div className="lyrics-full-text">
-                      <h4>{song.title} — Lyrics</h4>
-                      <div>{song.lyrics}</div>
-                      <button
-                        type="button"
-                        className="lyrics-copy-button"
-                        onClick={() => {
-                          if (navigator.clipboard?.writeText) {
-                            navigator.clipboard
-                              .writeText(song.lyrics)
-                              .catch(() => {
-                                setError(
-                                  "Couldn't copy the lyrics. Please select and copy the text manually.",
-                                );
-                              });
-                          } else {
-                            setError(
-                              "Copy isn't supported here. Please select and copy the lyrics manually.",
-                            );
-                          }
-                        }}
-                      >
-                        Copy Lyrics
-                      </button>
-                    </div>
-                  )}
-                </article>
-              );
-            })}
-          </div>
-        )}
-      </section>
-    </main>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </main>
+    </>
   );
 }
 

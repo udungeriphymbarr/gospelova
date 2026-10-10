@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase";
 import DOMPurify from "dompurify";
 import "../styles/music.css";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function renderArticleContent(content = "") {
   // Legacy plain text should remain plain text.
@@ -74,74 +75,90 @@ function BlogDetails() {
       })
     : "";
 
+  const seoDescription =
+    post?.excerpt?.trim() ||
+    `Read ${post?.title || "this gospel article"} on Gospelova, featuring gospel music news, artist stories, and inspiring Christian content.`;
+
   return (
-    <section className="music-page gospel-article-page">
-      <div className="container">
-        <Link to="/blog" className="gospel-article-back">
-          ← Back to Gospel News
-        </Link>
+    <>
+      {post && (
+        <SEO
+          title={post.title}
+          description={seoDescription}
+          image={coverUrl || undefined}
+          url={`/blog/${post.slug}`}
+          type="article"
+        />
+      )}
 
-        {loading && <LoadingState message="Loading gospel article..." />}
+      <section className="music-page gospel-article-page">
+        <div className="container">
+          <Link to="/blog" className="gospel-article-back">
+            ← Back to Gospel News
+          </Link>
 
-        {!loading && error && (
-          <div className="music-page__status" role="alert">
-            {error}
-          </div>
-        )}
+          {loading && <LoadingState message="Loading gospel article..." />}
 
-        {!loading && post && (
-          <article className="gospel-article">
-            <header className="gospel-article-header">
-              <p className="music-page__eyebrow">{post.category}</p>
+          {!loading && error && (
+            <div className="music-page__status" role="alert">
+              {error}
+            </div>
+          )}
 
-              <h1 className="music-page__title">{post.title}</h1>
+          {!loading && post && (
+            <article className="gospel-article">
+              <header className="gospel-article-header">
+                <p className="music-page__eyebrow">{post.category}</p>
 
-              {post.excerpt && (
-                <p className="music-page__description gospel-article-excerpt">
-                  {post.excerpt}
+                <h1 className="music-page__title">{post.title}</h1>
+
+                {post.excerpt && (
+                  <p className="music-page__description gospel-article-excerpt">
+                    {post.excerpt}
+                  </p>
+                )}
+
+                <p className="gospel-article-meta">
+                  By {post.author || "Gospelova"}
+                  {formattedDate && ` · ${formattedDate}`}
+                </p>
+              </header>
+
+              {coverUrl && (
+                <img
+                  className="gospel-article-cover"
+                  src={coverUrl}
+                  alt={post.title}
+                />
+              )}
+
+              <div className="gospel-article-content">
+                {renderArticleContent(post.content)}
+              </div>
+
+              {post.source_name && post.source_url && (
+                <p className="gospel-article-source">
+                  Original source:{" "}
+                  <a
+                    href={post.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {post.source_name}
+                  </a>
                 </p>
               )}
 
-              <p className="gospel-article-meta">
-                By {post.author || "Gospelova"}
-                {formattedDate && ` · ${formattedDate}`}
-              </p>
-            </header>
-
-            {coverUrl && (
-              <img
-                className="gospel-article-cover"
-                src={coverUrl}
-                alt={post.title}
-              />
-            )}
-
-            <div className="gospel-article-content">
-              {renderArticleContent(post.content)}
-            </div>
-
-            {post.source_name && post.source_url && (
-              <p className="gospel-article-source">
-                Original source:{" "}
-                <a
-                  href={post.source_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {post.source_name}
-                </a>
-              </p>
-            )}
-
-            <footer className="gospel-article-footer">
-              <Link to="/blog" className="music-page__view-link">
-                ← More Gospel News & Stories
-              </Link>
-            </footer>
-          </article>
-        )}
-      </div>
-    </section>
+              <footer className="gospel-article-footer">
+                <Link to="/blog" className="music-page__view-link">
+                  ← More Gospel News & Stories
+                </Link>
+              </footer>
+            </article>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 

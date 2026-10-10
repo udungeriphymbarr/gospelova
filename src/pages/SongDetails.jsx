@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import AudioPlayer from "../components/AudioPlayer";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function SongDetails() {
   const { slug } = useParams();
@@ -142,64 +143,80 @@ function SongDetails() {
   const artist = song.artists?.name ?? "Unknown artist";
   const category = song.categories?.name ?? "Gospel Music";
 
+  const seoDescription =
+    song.description?.trim() ||
+    `Discover ${song.title} by ${artist} on Gospelova. Listen to the song, download gospel music, and explore the lyrics.`;
+
   return (
-    <section className="song-details">
-      <div className="container">
-        <Link to="/music" className="song-details__back">
-          ← Back to Music
-        </Link>
+    <>
+      <SEO
+        title={`${song.title} by ${artist}`}
+        description={seoDescription}
+        image={coverUrl || undefined}
+        url={`/music/${song.slug}`}
+        type="music.song"
+      />
 
-        <div className="song-details__header">
-          <div className="song-details__cover">
-            {coverUrl ? (
-              <img src={coverUrl} alt={`${song.title} by ${artist}`} />
-            ) : (
-              <div className="song-details__placeholder">
-                <span>♪</span>
-              </div>
-            )}
-          </div>
+      <section className="song-details">
+        <div className="container">
+          <Link to="/music" className="song-details__back">
+            ← Back to Music
+          </Link>
 
-          <div className="song-details__info">
-            <p className="song-details__category">{category}</p>
-
-            <h1>{song.title}</h1>
-
-            <p className="song-details__artist">By {artist}</p>
-
-            {releaseDate && (
-              <p className="song-details__date">Released {releaseDate}</p>
-            )}
-
-            {song.description && (
-              <p className="song-details__description">{song.description}</p>
-            )}
-
-            <div className="song-details__actions">
-              {downloadUrl && (
-                <a href={downloadUrl} className="button button--outline">
-                  ↓ Download
-                </a>
+          <div className="song-details__header">
+            <div className="song-details__cover">
+              {coverUrl ? (
+                <img src={coverUrl} alt={`${song.title} by ${artist}`} />
+              ) : (
+                <div className="song-details__placeholder">
+                  <span>♪</span>
+                </div>
               )}
             </div>
 
-            {audioUrl && <AudioPlayer audioUrl={audioUrl} title={song.title} />}
+            <div className="song-details__info">
+              <p className="song-details__category">{category}</p>
 
-            {song.audio_path && !audioUrl && (
-              <p>Audio is temporarily unavailable. Please try again later.</p>
-            )}
+              <h1>{song.title}</h1>
+
+              <p className="song-details__artist">By {artist}</p>
+
+              {releaseDate && (
+                <p className="song-details__date">Released {releaseDate}</p>
+              )}
+
+              {song.description && (
+                <p className="song-details__description">{song.description}</p>
+              )}
+
+              <div className="song-details__actions">
+                {downloadUrl && (
+                  <a href={downloadUrl} className="button button--outline">
+                    ↓ Download
+                  </a>
+                )}
+              </div>
+
+              {audioUrl && (
+                <AudioPlayer audioUrl={audioUrl} title={song.title} />
+              )}
+
+              {song.audio_path && !audioUrl && (
+                <p>Audio is temporarily unavailable. Please try again later.</p>
+              )}
+            </div>
+          </div>
+
+          <div className="song-details__lyrics">
+            <h2>Lyrics</h2>
+
+            <div className="song-details__lyrics-content">
+              {song.lyrics || "Lyrics are not available yet."}
+            </div>
           </div>
         </div>
-
-        <div className="song-details__lyrics">
-          <h2>Lyrics</h2>
-
-          <div className="song-details__lyrics-content">
-            {song.lyrics || "Lyrics are not available yet."}
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

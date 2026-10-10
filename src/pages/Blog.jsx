@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/music.css";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -53,103 +54,112 @@ function Blog() {
   }
 
   return (
-    <section className="music-page gospel-blog-page">
-      <div className="container">
-        <header className="music-page__header">
-          <p className="music-page__eyebrow">GOSPELOVA JOURNAL</p>
-          <h1 className="music-page__title">Gospel News & Stories</h1>
-          <p className="music-page__description">
-            Discover gospel music news, artist stories, new releases, and
-            inspiring updates from the gospel music community.
-          </p>
-        </header>
+    <>
+      <SEO
+        title="Gospel News & Stories"
+        description="Read gospel music news, artist stories, new releases, and inspiring updates from the gospel music community on Gospelova."
+        url="/blog"
+      />
 
-        {loading && (
-          <LoadingState message="Loading gospel news and stories..." />
-        )}
-
-        {!loading && error && (
-          <div className="music-page__status" role="alert">
-            {error}
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="gospel-blog-retry"
-            >
-              Try again
-            </button>
-          </div>
-        )}
-
-        {!loading && !error && posts.length === 0 && (
-          <div className="music-page__status">
-            <h2>No articles published yet</h2>
-            <p>
-              Gospel news and stories will appear here when they are published.
+      <section className="music-page gospel-blog-page">
+        <div className="container">
+          <header className="music-page__header">
+            <p className="music-page__eyebrow">GOSPELOVA JOURNAL</p>
+            <h1 className="music-page__title">Gospel News & Stories</h1>
+            <p className="music-page__description">
+              Discover gospel music news, artist stories, new releases, and
+              inspiring updates from the gospel music community.
             </p>
-          </div>
-        )}
+          </header>
 
-        {!loading && !error && posts.length > 0 && (
-          <div className="music-page__grid">
-            {posts.map((post) => {
-              const coverUrl = getCoverUrl(post.cover_image_path);
+          {loading && (
+            <LoadingState message="Loading gospel news and stories..." />
+          )}
 
-              return (
-                <article className="music-page__card" key={post.id}>
-                  {coverUrl ? (
-                    <img
-                      className="music-page__cover"
-                      src={coverUrl}
-                      alt={post.title}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="music-page__cover music-page__cover-placeholder">
-                      ♪
-                    </div>
-                  )}
+          {!loading && error && (
+            <div className="music-page__status" role="alert">
+              {error}
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="gospel-blog-retry"
+              >
+                Try again
+              </button>
+            </div>
+          )}
 
-                  <p className="gospel-blog-category">{post.category}</p>
+          {!loading && !error && posts.length === 0 && (
+            <div className="music-page__status">
+              <h2>No articles published yet</h2>
+              <p>
+                Gospel news and stories will appear here when they are
+                published.
+              </p>
+            </div>
+          )}
 
-                  <h2 className="music-page__song-title">{post.title}</h2>
+          {!loading && !error && posts.length > 0 && (
+            <div className="music-page__grid">
+              {posts.map((post) => {
+                const coverUrl = getCoverUrl(post.cover_image_path);
 
-                  <p className="gospel-blog-meta">
-                    {post.author} · {formatDate(post.published_at)}
-                  </p>
+                return (
+                  <article className="music-page__card" key={post.id}>
+                    {coverUrl ? (
+                      <img
+                        className="music-page__cover"
+                        src={coverUrl}
+                        alt={post.title}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="music-page__cover music-page__cover-placeholder">
+                        ♪
+                      </div>
+                    )}
 
-                  {post.excerpt && (
-                    <p className="gospel-blog-excerpt">{post.excerpt}</p>
-                  )}
+                    <p className="gospel-blog-category">{post.category}</p>
 
-                  {post.source_name && post.source_url && (
-                    <p className="gospel-blog-source">
-                      Source:{" "}
-                      <a
-                        href={post.source_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {post.source_name}
-                      </a>
+                    <h2 className="music-page__song-title">{post.title}</h2>
+
+                    <p className="gospel-blog-meta">
+                      {post.author} · {formatDate(post.published_at)}
                     </p>
-                  )}
 
-                  <div className="music-page__actions">
-                    <Link
-                      to={`/blog/${post.slug}`}
-                      className="music-page__view-link"
-                    >
-                      Read Article →
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </section>
+                    {post.excerpt && (
+                      <p className="gospel-blog-excerpt">{post.excerpt}</p>
+                    )}
+
+                    {post.source_name && post.source_url && (
+                      <p className="gospel-blog-source">
+                        Source:{" "}
+                        <a
+                          href={post.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {post.source_name}
+                        </a>
+                      </p>
+                    )}
+
+                    <div className="music-page__actions">
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="music-page__view-link"
+                      >
+                        Read Article →
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 

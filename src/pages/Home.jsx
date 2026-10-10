@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import SEO from "../components/SEO";
 
 import SectionHeading from "../components/SectionHeading";
 import SongCard from "../components/SongCard";
@@ -190,6 +191,11 @@ function Home() {
 
   return (
     <div className="home">
+      <SEO
+        title="Gospel Music, Songs, Lyrics & News"
+        description="Discover gospel songs, download gospel music, explore lyrics, find gospel artists, and read inspiring Christian music news from Nigeria and beyond."
+        url="/"
+      />
       {/* Hero */}
       <section className="home__hero">
         <div className="container home__hero-content">

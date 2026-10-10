@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/artists.css";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function ArtistDetails() {
   const { slug } = useParams();
@@ -116,102 +117,115 @@ function ArtistDetails() {
   }
 
   return (
-    <section className="page artists-page">
-      <div className="container">
-        <Link to="/artists" className="artist-back-link">
-          ← All Artists
-        </Link>
+    <>
+      <SEO
+        title={`${artist.name} - Gospel Artist`}
+        description={
+          artist.bio?.trim() ||
+          `Discover ${artist.name} on Gospelova. Explore gospel music, artist releases, and songs to listen to and download.`
+        }
+        image={artist.imageUrl || undefined}
+        url={`/artists/${artist.slug}`}
+        type="profile"
+      />
 
-        <header className="artist-detail-header">
-          {artist.imageUrl ? (
-            <img
-              className="artist-detail-image"
-              src={artist.imageUrl}
-              alt={artist.name}
-            />
-          ) : (
-            <div className="artist-detail-placeholder" aria-hidden="true">
-              {artist.name.charAt(0).toUpperCase()}
+      <section className="page artists-page">
+        <div className="container">
+          <Link to="/artists" className="artist-back-link">
+            ← All Artists
+          </Link>
+
+          <header className="artist-detail-header">
+            {artist.imageUrl ? (
+              <img
+                className="artist-detail-image"
+                src={artist.imageUrl}
+                alt={artist.name}
+              />
+            ) : (
+              <div className="artist-detail-placeholder" aria-hidden="true">
+                {artist.name.charAt(0).toUpperCase()}
+              </div>
+            )}
+
+            <div className="artist-detail-info">
+              <p className="artists-eyebrow">GOSPELOVA ARTIST</p>
+              <h1>{artist.name}</h1>
+              <p className="artist-detail-bio">
+                {artist.bio ||
+                  "Discover music and ministry from this gospel artist."}
+              </p>
+              <p className="artist-song-count">
+                {songs.length}{" "}
+                {songs.length === 1 ? "published song" : "published songs"}
+              </p>
             </div>
-          )}
+          </header>
 
-          <div className="artist-detail-info">
-            <p className="artists-eyebrow">GOSPELOVA ARTIST</p>
-            <h1>{artist.name}</h1>
-            <p className="artist-detail-bio">
-              {artist.bio ||
-                "Discover music and ministry from this gospel artist."}
-            </p>
-            <p className="artist-song-count">
-              {songs.length}{" "}
-              {songs.length === 1 ? "published song" : "published songs"}
-            </p>
-          </div>
-        </header>
-
-        <section className="artist-songs-section">
-          <div className="artist-songs-heading">
-            <div>
-              <p className="artists-eyebrow">THE MUSIC</p>
-              <h2>Songs by {artist.name}</h2>
+          <section className="artist-songs-section">
+            <div className="artist-songs-heading">
+              <div>
+                <p className="artists-eyebrow">THE MUSIC</p>
+                <h2>Songs by {artist.name}</h2>
+              </div>
             </div>
-          </div>
 
-          {songs.length === 0 ? (
-            <div className="artists-message">
-              <h3>No published songs yet</h3>
-              <p>Check back later for music from this artist.</p>
-            </div>
-          ) : (
-            <div className="public-artists-grid artist-songs-grid">
-              {songs.map((song) => (
-                <article
-                  className="public-artist-card artist-song-card"
-                  key={song.id}
-                >
-                  <Link
-                    to={`/music/${song.slug}`}
-                    className="artist-song-cover-link"
-                    aria-label={`View ${song.title}`}
+            {songs.length === 0 ? (
+              <div className="artists-message">
+                <h3>No published songs yet</h3>
+                <p>Check back later for music from this artist.</p>
+              </div>
+            ) : (
+              <div className="public-artists-grid artist-songs-grid">
+                {songs.map((song) => (
+                  <article
+                    className="public-artist-card artist-song-card"
+                    key={song.id}
                   >
-                    {song.coverUrl ? (
-                      <img
-                        className="artist-song-cover"
-                        src={song.coverUrl}
-                        alt={`${song.title} cover art`}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="artist-song-cover-placeholder">
-                        Gospelova
-                      </div>
-                    )}
-                  </Link>
-
-                  <div className="public-artist-content">
-                    <h3>
-                      <Link
-                        to={`/music/${song.slug}`}
-                        className="artist-song-title"
-                      >
-                        {song.title}
-                      </Link>
-                    </h3>
-                    <p>{song.artists?.name || artist.name}</p>
                     <Link
                       to={`/music/${song.slug}`}
-                      className="public-artist-link"
+                      className="artist-song-cover-link"
+                      aria-label={`View ${song.title}`}
                     >
-                      Listen & Download
+                      {song.coverUrl ? (
+                        <img
+                          className="artist-song-cover"
+                          src={song.coverUrl}
+                          alt={`${song.title} cover art`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="artist-song-cover-placeholder">
+                          Gospelova
+                        </div>
+                      )}
                     </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-      </div>
-    </section>
+
+                    <div className="public-artist-content">
+                      <h3>
+                        <Link
+                          to={`/music/${song.slug}`}
+                          className="artist-song-title"
+                        >
+                          {song.title}
+                        </Link>
+                      </h3>
+                      <p>{song.artists?.name || artist.name}</p>
+                      <Link
+                        to={`/music/${song.slug}`}
+                        className="public-artist-link"
+                      >
+                        Listen & Download
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
+      </section>
+    </>
   );
 }
 

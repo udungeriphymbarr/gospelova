@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function Music() {
   const [songs, setSongs] = useState([]);
@@ -49,100 +50,107 @@ function Music() {
   }, []);
 
   return (
-    <section className="music-page">
-      <div className="container">
-        <header className="music-page__header">
-          <p className="music-page__eyebrow">
-            YOUR SOUND. YOUR FAITH. YOUR GOSPEL.
-          </p>
+    <>
+      <SEO
+        title="Discover Gospel Music"
+        description="Explore gospel songs, discover inspiring artists, and download gospel music to accompany your faith journey on Gospelova."
+        url="/music"
+      />
 
-          <h1 className="music-page__title">Discover Gospel Music</h1>
+      <section className="music-page">
+        <div className="container">
+          <header className="music-page__header">
+            <p className="music-page__eyebrow">
+              YOUR SOUND. YOUR FAITH. YOUR GOSPEL.
+            </p>
 
-          <p className="music-page__description">
-            Explore gospel songs, discover inspiring artists, and find music to
-            accompany your faith journey.
-          </p>
-        </header>
+            <h1 className="music-page__title">Discover Gospel Music</h1>
 
-        {loading && <LoadingState message="Loading gospel music..." />}
+            <p className="music-page__description">
+              Explore gospel songs, discover inspiring artists, and find music
+              to accompany your faith journey.
+            </p>
+          </header>
 
-        {error && (
-          <p
-            className="music-page__status music-page__status--error"
-            role="alert"
-          >
-            {error}
-          </p>
-        )}
+          {loading && <LoadingState message="Loading gospel music..." />}
 
-        {!loading && !error && songs.length === 0 && (
-          <p className="music-page__status">
-            No songs are available yet. Check back soon for new gospel music!
-          </p>
-        )}
+          {error && (
+            <p
+              className="music-page__status music-page__status--error"
+              role="alert"
+            >
+              {error}
+            </p>
+          )}
 
-        {!loading && !error && songs.length > 0 && (
-          <div className="music-page__grid">
-            {songs.map((song) => {
-              const coverUrl = song.cover_image_path
-                ? supabase.storage
-                    .from("song-cover")
-                    .getPublicUrl(song.cover_image_path).data.publicUrl
-                : null;
-              console.log("Song:", song.title);
-              console.log("Generated cover URL:", coverUrl);
-              return (
-                <article className="music-page__card" key={song.id}>
-                  {coverUrl ? (
-                    <img
-                      src={coverUrl}
-                      alt={`${song.title} cover`}
-                      className="music-page__cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="music-page__cover-placeholder"
-                      aria-label="No cover art available"
-                    >
-                      <span>♪</span>
-                    </div>
-                  )}
+          {!loading && !error && songs.length === 0 && (
+            <p className="music-page__status">
+              No songs are available yet. Check back soon for new gospel music!
+            </p>
+          )}
 
-                  {song.categories?.name && (
-                    <span className="music-page__category">
-                      {song.categories.name}
-                    </span>
-                  )}
+          {!loading && !error && songs.length > 0 && (
+            <div className="music-page__grid">
+              {songs.map((song) => {
+                const coverUrl = song.cover_image_path
+                  ? supabase.storage
+                      .from("song-cover")
+                      .getPublicUrl(song.cover_image_path).data.publicUrl
+                  : null;
+                console.log("Song:", song.title);
+                console.log("Generated cover URL:", coverUrl);
+                return (
+                  <article className="music-page__card" key={song.id}>
+                    {coverUrl ? (
+                      <img
+                        src={coverUrl}
+                        alt={`${song.title} cover`}
+                        className="music-page__cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div
+                        className="music-page__cover-placeholder"
+                        aria-label="No cover art available"
+                      >
+                        <span>♪</span>
+                      </div>
+                    )}
 
-                  <h2 className="music-page__song-title">{song.title}</h2>
+                    {song.categories?.name && (
+                      <span className="music-page__category">
+                        {song.categories.name}
+                      </span>
+                    )}
 
-                  <p className="music-page__artist">
-                    By {song.artists?.name ?? "Unknown artist"}
-                  </p>
+                    <h2 className="music-page__song-title">{song.title}</h2>
 
-                  {song.description && (
-                    <p className="music-page__description">
-                      {song.description}
+                    <p className="music-page__artist">
+                      By {song.artists?.name ?? "Unknown artist"}
                     </p>
-                  )}
 
-                  <div className="music-page__actions">
-                    <Link
-                      to={`/music/${song.slug}`}
-                      className="music-page__view-link"
-                    >
-                      View Song
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </section>
+                    {song.description && (
+                      <p className="music-page__description">
+                        {song.description}
+                      </p>
+                    )}
+
+                    <div className="music-page__actions">
+                      <Link
+                        to={`/music/${song.slug}`}
+                        className="music-page__view-link"
+                      >
+                        View Song
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
-
 export default Music;

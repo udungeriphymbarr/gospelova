@@ -5,6 +5,7 @@ import SongCard from "../components/SongCard";
 import SectionHeading from "../components/SectionHeading";
 import "../styles/music.css";
 import LoadingState from "../components/LoadingState";
+import SEO from "../components/SEO";
 
 function CategoryDetails() {
   const { slug } = useParams();
@@ -99,6 +100,16 @@ function CategoryDetails() {
 
         {!loading && !error && category && (
           <>
+            <SEO
+              title={`${category.name} Gospel Music`}
+              description={
+                category.description?.trim() ||
+                `Explore gospel songs in the ${category.name} category on Gospelova. Discover music, browse artists, and find songs to listen to and download.`
+              }
+              url={`/categories/${category.slug}`}
+              type="website"
+            />
+
             <SectionHeading
               eyebrow="GOSPELOVA CATEGORIES"
               title={category.name}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/contact.css";
+import SEO from "../components/SEO";
 
 const WHATSAPP_NUMBER = "2347083038043";
 
@@ -97,123 +98,131 @@ function Contact() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <main className="contact-page">
-      <section className="contact-hero">
-        <p className="contact-eyebrow">WE'D LOVE TO HEAR FROM YOU</p>
-        <h1>Contact Gospelova</h1>
-        <p>
-          Have a question, a music submission, a story idea, or feedback? Send
-          us a message. Let's connect through the power of gospel music.
-        </p>
-      </section>
+    <>
+      <SEO
+        title="Contact Us"
+        description="Contact Gospelova with your questions, gospel music submissions, story ideas, and feedback. Connect with our team through our contact form or WhatsApp."
+        url="/contact"
+      />
 
-      <section className="contact-content">
-        <div className="contact-info">
-          <h2>Let's Connect</h2>
+      <main className="contact-page">
+        <section className="contact-hero">
+          <p className="contact-eyebrow">WE'D LOVE TO HEAR FROM YOU</p>
+          <h1>Contact Gospelova</h1>
           <p>
-            Whether you're an artist, listener, ministry, or music enthusiast,
-            we're happy to hear from you.
+            Have a question, a music submission, a story idea, or feedback? Send
+            us a message. Let's connect through the power of gospel music.
           </p>
+        </section>
 
-          <a
-            className="contact-whatsapp-button"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span aria-hidden="true">↗</span>
-            Chat with us on WhatsApp
-          </a>
-
-          <p className="contact-note">
-            You can also use the form to send us a message directly.
-          </p>
-        </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <h2>Send Us a Message</h2>
-
-          {feedback.text && (
-            <p
-              className={`contact-feedback contact-feedback--${feedback.type}`}
-              role={feedback.type === "error" ? "alert" : "status"}
-            >
-              {feedback.text}
+        <section className="contact-content">
+          <div className="contact-info">
+            <h2>Let's Connect</h2>
+            <p>
+              Whether you're an artist, listener, ministry, or music enthusiast,
+              we're happy to hear from you.
             </p>
-          )}
 
-          <div className="contact-field">
-            <label htmlFor="contact-name">Full Name *</label>
-            <input
-              id="contact-name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              value={form.name}
-              onChange={handleChange}
-              maxLength={100}
-              required
-            />
+            <a
+              className="contact-whatsapp-button"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span aria-hidden="true">↗</span>
+              Chat with us on WhatsApp
+            </a>
+
+            <p className="contact-note">
+              You can also use the form to send us a message directly.
+            </p>
           </div>
 
-          <div className="contact-field">
-            <label htmlFor="contact-email">Email Address *</label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={form.email}
-              onChange={handleChange}
-              maxLength={254}
-              required
-            />
-          </div>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <h2>Send Us a Message</h2>
 
-          <div className="contact-field">
-            <label htmlFor="contact-subject">Subject *</label>
-            <input
-              id="contact-subject"
-              name="subject"
-              type="text"
-              value={form.subject}
-              onChange={handleChange}
-              maxLength={200}
-              placeholder="What would you like to discuss?"
-              required
-            />
-          </div>
+            {feedback.text && (
+              <p
+                className={`contact-feedback contact-feedback--${feedback.type}`}
+                role={feedback.type === "error" ? "alert" : "status"}
+              >
+                {feedback.text}
+              </p>
+            )}
 
-          <div className="contact-field">
-            <label htmlFor="contact-message">Your Message *</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              maxLength={10000}
-              rows={7}
-              placeholder="Write your message here..."
-              required
-            />
-          </div>
+            <div className="contact-field">
+              <label htmlFor="contact-name">Full Name *</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                value={form.name}
+                onChange={handleChange}
+                maxLength={100}
+                required
+              />
+            </div>
 
-          <button
-            className="contact-submit-button"
-            type="submit"
-            disabled={submitting}
-            aria-busy={submitting}
-          >
-            {submitting ? "Sending your message..." : "Send Message"}
-          </button>
+            <div className="contact-field">
+              <label htmlFor="contact-email">Email Address *</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={form.email}
+                onChange={handleChange}
+                maxLength={254}
+                required
+              />
+            </div>
 
-          <p className="contact-privacy-note">
-            Your message is stored securely and is accessible to authorized
-            Gospelova administrators.
-          </p>
-        </form>
-      </section>
-    </main>
+            <div className="contact-field">
+              <label htmlFor="contact-subject">Subject *</label>
+              <input
+                id="contact-subject"
+                name="subject"
+                type="text"
+                value={form.subject}
+                onChange={handleChange}
+                maxLength={200}
+                placeholder="What would you like to discuss?"
+                required
+              />
+            </div>
+
+            <div className="contact-field">
+              <label htmlFor="contact-message">Your Message *</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                maxLength={10000}
+                rows={7}
+                placeholder="Write your message here..."
+                required
+              />
+            </div>
+
+            <button
+              className="contact-submit-button"
+              type="submit"
+              disabled={submitting}
+              aria-busy={submitting}
+            >
+              {submitting ? "Sending your message..." : "Send Message"}
+            </button>
+
+            <p className="contact-privacy-note">
+              Your message is stored securely and is accessible to authorized
+              Gospelova administrators.
+            </p>
+          </form>
+        </section>
+      </main>
+    </>
   );
 }
 

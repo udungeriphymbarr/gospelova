@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import LoadingState from "../components/LoadingState";
 
 function Music() {
   const [songs, setSongs] = useState([]);
@@ -63,9 +64,7 @@ function Music() {
           </p>
         </header>
 
-        {loading && (
-          <p className="music-page__status">Loading gospel music...</p>
-        )}
+        {loading && <LoadingState message="Loading gospel music..." />}
 
         {error && (
           <p

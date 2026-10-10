@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/admin.css";
+import LoadingState from "../components/LoadingState";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ function AdminDashboard() {
   if (loading) {
     return (
       <main className="admin-login-page">
-        <p>Verifying admin access...</p>
+        <LoadingState message="Verifying admin access..." fullPage />
       </main>
     );
   }
@@ -96,8 +97,8 @@ function AdminDashboard() {
       <section className="admin-welcome-card">
         <h2>Your music platform, one place.</h2>
         <p>
-          Manage songs, artists, categories, lyrics, and cover artwork from your
-          Gospelova dashboard.
+          Manage songs, artists, categories, lyrics, blog articles, and cover
+          artwork from your Gospelova dashboard.
         </p>
 
         <div className="admin-dashboard-actions">
@@ -115,6 +116,18 @@ function AdminDashboard() {
 
           <Link to="/admin/categories" className="admin-action-button">
             Manage Categories
+          </Link>
+
+          <Link to="/admin/blog/new" className="admin-action-button">
+            + Add a Blog Post
+          </Link>
+
+          <Link to="/admin/blog" className="admin-action-button">
+            Manage Blog Posts
+          </Link>
+
+          <Link to="/admin/messages" className="admin-action-button">
+            Manage Messages
           </Link>
         </div>
       </section>

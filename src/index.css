@@ -3,6 +3,10 @@
 @import "./styles/song.css";
 @import "./styles/music.css";
 @import "./styles/admin.css";
+@import "./styles/artists.css";
+@import "./styles/contact.css";
+@import "./styles/rich-text-editor.css";
+@import "./styles/loading-state.css";
 
 * {
   margin: 0;

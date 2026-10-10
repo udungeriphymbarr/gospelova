@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/admin.css";
+import LoadingState from "../components/LoadingState";
 
 function ManageSongs() {
   const [songs, setSongs] = useState([]);
@@ -200,7 +201,7 @@ function ManageSongs() {
           </button>
         </div>
 
-        {loading && <p>Loading songs...</p>}
+        {loading && <LoadingState message="Loading your song library..." />}
 
         {!loading && error && (
           <div className="admin-error" role="alert">

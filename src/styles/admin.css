@@ -778,3 +778,575 @@
   }
 }
 
+/* Blog management */
+
+.admin-error {
+  color: #b42318;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px 0;
+}
+
+.admin-form-group input:not([type="checkbox"]),
+.admin-form-group textarea,
+.admin-form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  margin-top: 7px;
+  border: 1px solid #d7cce5;
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+  color: #28153f;
+}
+
+.admin-form-group textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-form-group small {
+  display: block;
+  margin-top: 7px;
+  color: #cbbddd;
+  overflow-wrap: anywhere;
+}
+
+.admin-form-group input[type="file"] {
+  display: block;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.admin-form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+.admin-dashboard-actions button {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #d8ad45;
+  color: #28153f;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-dashboard-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-blog-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-blog-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px;
+  border: 1px solid #49345f;
+  border-radius: 12px;
+  background: #241638;
+}
+
+.admin-blog-thumbnail {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.admin-blog-item-info {
+  flex: 1;
+  min-width: 180px;
+}
+
+.admin-blog-item-info h3 {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.admin-blog-item-info p {
+  margin: 0 0 6px;
+}
+
+.admin-blog-item-info small {
+  color: #cbbddd;
+}
+
+.admin-blog-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-blog-item-actions button {
+  padding: 8px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .admin-blog-item {
+    align-items: flex-start;
+  }
+
+  .admin-blog-item-actions {
+    width: 100%;
+  }
+}
+
+
+/* Contact message inbox */
+
+.admin-inbox-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-inbox-toolbar h2 {
+  margin: 0;
+}
+
+.admin-inbox-toolbar button,
+.admin-inbox-filters select {
+  padding: 10px 14px;
+  border: 1px solid #cbbddd;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.admin-inbox-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.admin-inbox-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-inbox-item {
+  overflow: hidden;
+  border: 1px solid #49345f;
+  border-radius: 10px;
+  background: #241638;
+}
+
+.admin-inbox-item.is-new {
+  border-left: 4px solid #d8ad45;
+}
+
+.admin-inbox-open {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-inbox-open:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.admin-inbox-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-message-status {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: #e7dcf2;
+  color: #28153f;
+  font-size: 0.78rem;
+  text-transform: capitalize;
+}
+
+.status-new {
+  background: #f8df9c;
+}
+
+.status-replied {
+  background: #c8ebd4;
+}
+
+.status-archived {
+  background: #dedee4;
+}
+
+.admin-inbox-sender,
+.admin-inbox-date,
+.admin-inbox-hint {
+  color: #cbbddd;
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-inbox-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.admin-message-detail {
+  margin-top: 24px;
+}
+
+.admin-message-body {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid #49345f;
+  border-radius: 10px;
+  background: #241638;
+  color: #fff;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.admin-message-detail a:not(.admin-action-button) {
+  color: #d8ad45;
+  overflow-wrap: anywhere;
+}
+
+.admin-message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-message-actions button {
+  padding: 10px 13px;
+  border: 1px solid #cbbddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #28153f;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-message-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .admin-inbox-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-message-actions {
+    flex-direction: column;
+  }
+
+  .admin-message-actions > * {
+    text-align: center;
+  }
+}
+
+
+.blog-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.blog-editor-preview {
+  padding: 24px;
+  border: 1px solid #d7c8e2;
+  border-radius: 10px;
+  background: #fff;
+  color: #241535;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.blog-editor-preview h2 {
+  margin-top: 0;
+}
+
+.blog-editor-preview h2,
+.blog-editor-preview h3 {
+  line-height: 1.4;
+}
+
+.blog-editor-preview blockquote {
+  margin: 1em 0;
+  padding-left: 16px;
+  border-left: 4px solid #d8ad45;
+}
+
+.blog-editor-preview a {
+  color: #64378b;
+  text-decoration: underline;
+}
+
+.blog-editor-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Gospelova Admin Inbox Polish */
+
+.admin-inbox-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(220px, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.admin-inbox-search,
+.admin-inbox-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.admin-inbox-search label,
+.admin-inbox-filters label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b2470;
+}
+
+.admin-inbox-search input,
+.admin-inbox-filters select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d8cde1;
+  border-radius: 8px;
+  background: #fff;
+  color: #241535;
+  font: inherit;
+}
+
+.admin-inbox-search input:focus,
+.admin-inbox-filters select:focus {
+  outline: 2px solid #d8ad45;
+  outline-offset: 2px;
+}
+
+.admin-inbox-item {
+  overflow: hidden;
+  border: 1px solid #e5ddea;
+  border-radius: 10px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-inbox-item:hover {
+  border-color: #bba3cf;
+  box-shadow: 0 4px 14px rgb(49 25 70 / 7%);
+}
+
+.admin-inbox-item.is-new {
+  border-left: 4px solid #d8ad45;
+  background: #fffcf5;
+}
+
+.admin-inbox-open {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-inbox-open:focus-visible {
+  outline: 2px solid #64378b;
+  outline-offset: -3px;
+  border-radius: 8px;
+}
+
+.admin-inbox-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.admin-inbox-heading strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #32194a;
+}
+
+.admin-message-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #eee8f3;
+  color: #4b2470;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.admin-message-status.status-new {
+  background: #fff0c7;
+  color: #704d00;
+}
+
+.admin-message-status.status-read {
+  background: #e8efff;
+  color: #294b89;
+}
+
+.admin-message-status.status-replied {
+  background: #dff5e7;
+  color: #21653b;
+}
+
+.admin-message-status.status-archived {
+  background: #eeeef0;
+  color: #55515b;
+}
+
+.admin-inbox-sender,
+.admin-inbox-date,
+.admin-inbox-preview,
+.admin-inbox-hint {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.admin-inbox-sender {
+  color: #4b4650;
+  font-size: 0.9rem;
+}
+
+.admin-inbox-date,
+.admin-inbox-hint {
+  color: #766d7d;
+  font-size: 0.8rem;
+}
+
+.admin-inbox-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #4b4650;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.admin-inbox-empty {
+  padding: 32px 16px;
+  border: 1px dashed #cfc0db;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.admin-inbox-empty h3 {
+  margin: 0 0 8px;
+  color: #4b2470;
+}
+
+.admin-inbox-empty p {
+  color: #766d7d;
+  line-height: 1.7;
+}
+
+.admin-inbox-empty button {
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid #d8cde1;
+  border-radius: 8px;
+  background: #fff;
+  color: #4b2470;
+  cursor: pointer;
+}
+
+.admin-message-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+
+.admin-message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-message-actions button,
+.admin-message-actions a {
+  max-width: 100%;
+}
+
+.admin-message-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .admin-inbox-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-inbox-heading {
+    flex-wrap: wrap;
+  }
+
+  .admin-inbox-open {
+    padding: 13px;
+  }
+
+  .admin-message-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-message-actions button,
+  .admin-message-actions a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

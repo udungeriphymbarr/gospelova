@@ -1,20 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Music from "./pages/Music";
 import Lyrics from "./pages/Lyrics";
 import Artists from "./pages/Artists";
-import Categories from "./pages/Categories";
+import CategoryDetails from "./pages/CategoryDetails";
+
 import Blog from "./pages/Blog";
+import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
-import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Privacy from "./pages/Privacy";
 import Copyright from "./pages/Copyright";
 import SongDetails from "./pages/SongDetails";
-import SupabaseTest from "./pages/SupabaseTest";
+import ArtistDetails from "./pages/ArtistDetails";
 
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -28,10 +29,13 @@ import EditArtist from "./admin/EditArtist";
 import ManageCategories from "./admin/ManageCategories";
 import AddCategory from "./admin/AddCategory";
 import EditCategory from "./admin/EditCategory";
+import BlogManagement from "./admin/BlogManagement";
+import ContactMessages from "./admin/ContactMessages";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Admin routes: outside the public website layout */}
 
@@ -126,6 +130,42 @@ function App() {
           }
         />
 
+        <Route
+          path="/admin/blog"
+          element={
+            <AdminRoute>
+              <BlogManagement />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/blog/new"
+          element={
+            <AdminRoute>
+              <BlogManagement />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/blog/edit/:id"
+          element={
+            <AdminRoute>
+              <BlogManagement />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/messages"
+          element={
+            <AdminRoute>
+              <ContactMessages />
+            </AdminRoute>
+          }
+        />
+
         {/* Public website routes */}
         <Route
           path="/*"
@@ -137,13 +177,13 @@ function App() {
                 <Route path="/lyrics" element={<Lyrics />} />
                 <Route path="/music/:slug" element={<SongDetails />} />
                 <Route path="/artists" element={<Artists />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/supabase-test" element={<SupabaseTest />} />
+                <Route path="/artists/:slug" element={<ArtistDetails />} />
+                <Route path="/categories/:slug" element={<CategoryDetails />} />
+
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogDetails />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
                 <Route path="/copyright" element={<Copyright />} />
               </Routes>
             </MainLayout>

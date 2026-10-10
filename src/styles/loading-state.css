@@ -1,0 +1,42 @@
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 28px 16px;
+  color: #4b2470;
+  text-align: center;
+}
+
+.loading-state p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.loading-state__spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border: 3px solid #e7dcef;
+  border-top-color: #d8ad45;
+  border-radius: 50%;
+  animation: gospelova-spin 0.8s linear infinite;
+}
+
+.loading-state--page {
+  min-height: 45vh;
+}
+
+@keyframes gospelova-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-state__spinner {
+    animation-duration: 1.8s;
+  }
+}

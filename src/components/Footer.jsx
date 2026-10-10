@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="footer">
@@ -7,17 +9,21 @@ function Footer() {
           <p>Your Sound. Your Faith. Your Gospel.</p>
         </div>
 
-        <div className="footer__links">
-          <a href="/music">Music</a>
-          <a href="/lyrics">Lyrics</a>
-          <a href="/artists">Artists</a>
-          <a href="/blog">Gospel News</a>
-          <a href="/contact">Contact</a>
-        </div>
+        <nav className="footer__links" aria-label="Footer navigation">
+          <Link to="/music">Music</Link>
+          <Link to="/lyrics">Lyrics</Link>
+          <Link to="/artists">Artists</Link>
+          <Link to="/blog">Gospel News</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/copyright">Copyright</Link>
+        </nav>
       </div>
 
       <div className="container footer__bottom">
         <p>© {new Date().getFullYear()} Gospelova. All rights reserved.</p>
+        <p>
+          <Link to="/copyright">Copyright Policy</Link>
+        </p>
       </div>
     </footer>
   );

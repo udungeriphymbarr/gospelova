@@ -7,13 +7,23 @@ import SongCard from "../components/SongCard";
 import ArtistCard from "../components/ArtistCard";
 import CategoryCard from "../components/CategoryCard";
 import BlogCard from "../components/BlogCard";
-
-import { popularArtists, categories, latestNews } from "../utils/homeData";
+import LoadingState from "../components/LoadingState";
 
 function Home() {
   const [latestSongs, setLatestSongs] = useState([]);
   const [songsLoading, setSongsLoading] = useState(true);
   const [songsError, setSongsError] = useState("");
+  const [popularArtists, setPopularArtists] = useState([]);
+  const [artistsLoading, setArtistsLoading] = useState(true);
+  const [artistsError, setArtistsError] = useState("");
+
+  const [categories, setCategories] = useState([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+  const [categoriesError, setCategoriesError] = useState("");
+
+  const [latestPosts, setLatestPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(true);
+  const [postsError, setPostsError] = useState("");
 
   useEffect(() => {
     async function fetchLatestSongs() {
@@ -44,6 +54,138 @@ function Home() {
     }
 
     fetchLatestSongs();
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    async function fetchPopularArtists() {
+      setArtistsLoading(true);
+      setArtistsError("");
+
+      try {
+        const { data, error } = await supabase
+          .from("artists")
+          .select("id, name, slug, image_path")
+          .order("created_at", { ascending: false })
+          .limit(4);
+
+        if (error) throw error;
+
+        const formattedArtists = (data ?? []).map((artist) => ({
+          ...artist,
+          image: artist.image_path
+            ? supabase.storage
+                .from("song-cover")
+                .getPublicUrl(artist.image_path).data.publicUrl
+            : null,
+        }));
+
+        if (active) setPopularArtists(formattedArtists);
+      } catch (err) {
+        console.error("Error fetching homepage artists:", err);
+
+        if (active) {
+          setArtistsError("We couldn't load the artists right now.");
+        }
+      } finally {
+        if (active) setArtistsLoading(false);
+      }
+    }
+
+    fetchPopularArtists();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    async function fetchCategories() {
+      setCategoriesLoading(true);
+      setCategoriesError("");
+
+      try {
+        const { data, error } = await supabase
+          .from("categories")
+          .select("id, name, slug, description")
+          .order("name", { ascending: true });
+
+        if (error) throw error;
+
+        if (active) {
+          setCategories(data ?? []);
+        }
+      } catch (err) {
+        console.error("Error fetching homepage categories:", err);
+
+        if (active) {
+          setCategoriesError("We couldn't load the categories right now.");
+        }
+      } finally {
+        if (active) setCategoriesLoading(false);
+      }
+    }
+
+    fetchCategories();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    async function fetchLatestPosts() {
+      setPostsLoading(true);
+      setPostsError("");
+
+      try {
+        const { data, error } = await supabase
+          .from("blog_posts")
+          .select(
+            "id, title, slug, excerpt, cover_image_path, category, author, published_at, created_at",
+          )
+          .eq("is_published", true)
+          .order("published_at", {
+            ascending: false,
+            nullsFirst: false,
+          })
+          .order("created_at", { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+
+        const formattedPosts = (data ?? []).map((post) => ({
+          ...post,
+          image: post.cover_image_path
+            ? supabase.storage
+                .from("song-cover")
+                .getPublicUrl(post.cover_image_path).data.publicUrl
+            : null,
+          date: post.published_at || post.created_at,
+        }));
+
+        if (active) setLatestPosts(formattedPosts);
+      } catch (err) {
+        console.error("Error fetching homepage blog posts:", err);
+
+        if (active) {
+          setPostsError("We couldn't load the latest news and stories.");
+        }
+      } finally {
+        if (active) setPostsLoading(false);
+      }
+    }
+
+    fetchLatestPosts();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   return (
@@ -87,7 +229,15 @@ function Home() {
             description="Discover the latest songs added to Gospelova."
           />
 
-          {songsLoading && <p>Loading latest gospel songs...</p>}
+          {songsLoading && (
+            <p>
+              Loading latest gospel song
+              {songsLoading && (
+                <LoadingState message="Loading latest gospel songs..." />
+              )}
+              s...
+            </p>
+          )}
 
           {songsError && <p role="alert">{songsError}</p>}
 
@@ -135,15 +285,29 @@ function Home() {
             description="Explore gospel artists and their music."
           />
 
-          <div className="artist-grid">
-            {popularArtists.map((artist) => (
-              <ArtistCard
-                key={artist.id}
-                name={artist.name}
-                image={artist.image}
-              />
-            ))}
-          </div>
+          {artistsLoading && (
+            <LoadingState message="Loading gospel artists..." />
+          )}
+
+          {artistsError && <p role="alert">{artistsError}</p>}
+
+          {!artistsLoading && !artistsError && popularArtists.length === 0 && (
+            <p>No artists have been added yet. Check back soon!</p>
+          )}
+
+          {!artistsLoading && !artistsError && popularArtists.length > 0 && (
+            <div className="artist-grid">
+              {popularArtists.map((artist) => (
+                <Link
+                  key={artist.id}
+                  to={`/artists/${artist.slug}`}
+                  className="home-artist-link"
+                >
+                  <ArtistCard name={artist.name} image={artist.image} />
+                </Link>
+              ))}
+            </div>
+          )}
 
           <div className="home__section-action">
             <Link to="/artists" className="button button--outline">
@@ -162,20 +326,33 @@ function Home() {
             description="Find gospel music by sound, style and mood."
           />
 
-          <div className="category-grid">
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                name={category.name}
-                slug={category.slug}
-                description={category.description}
-              />
-            ))}
-          </div>
+          {categoriesLoading && (
+            <LoadingState message="Loading music categories..." />
+          )}
+
+          {categoriesError && <p role="alert">{categoriesError}</p>}
+
+          {!categoriesLoading &&
+            !categoriesError &&
+            categories.length === 0 && (
+              <p>No categories have been added yet. Check back soon!</p>
+            )}
+
+          {!categoriesLoading && !categoriesError && categories.length > 0 && (
+            <div className="category-grid">
+              {categories.map((category) => (
+                <CategoryCard
+                  key={category.id}
+                  name={category.name}
+                  slug={category.slug}
+                  description={category.description}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* News */}
       {/* News */}
       <section className="home__section home__section--muted">
         <div className="container">
@@ -185,18 +362,38 @@ function Home() {
             description="Stay connected with gospel music and Christian stories."
           />
 
-          <div className="blog-grid">
-            {latestNews.map((post) => (
-              <BlogCard
-                key={post.id}
-                title={post.title}
-                excerpt={post.excerpt}
-                image={post.image}
-                date={post.date}
-                slug={post.slug}
-              />
-            ))}
-          </div>
+          {postsLoading && (
+            <LoadingState message="Loading the latest news and stories..." />
+          )}
+
+          {postsError && <p role="alert">{postsError}</p>}
+
+          {!postsLoading && !postsError && latestPosts.length === 0 && (
+            <p>No articles have been published yet. Check back soon!</p>
+          )}
+
+          {!postsLoading && !postsError && latestPosts.length > 0 && (
+            <div className="blog-grid">
+              {latestPosts.map((post) => (
+                <BlogCard
+                  key={post.id}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  image={post.image}
+                  date={
+                    post.date
+                      ? new Date(post.date).toLocaleDateString("en-NG", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })
+                      : ""
+                  }
+                  slug={post.slug}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="home__section-action">
             <Link to="/blog" className="button button--outline">

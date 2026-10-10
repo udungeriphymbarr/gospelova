@@ -1,0 +1,108 @@
+
+.rte {
+  overflow: hidden;
+  border: 1px solid #cbbddd;
+  border-radius: 10px;
+  background: #fff;
+  color: #241535;
+}
+
+.rte-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid #e5ddeb;
+  background: #f7f3fa;
+}
+
+.rte-toolbar button {
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #d7c8e2;
+  border-radius: 6px;
+  background: #fff;
+  color: #352044;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.rte-toolbar button.is-active {
+  border-color: #43225e;
+  background: #43225e;
+  color: #fff;
+}
+
+.rte-toolbar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rte-content {
+  min-height: 300px;
+  padding: 20px;
+  line-height: 1.8;
+}
+
+.rte-content .tiptap {
+  min-height: 260px;
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+.rte-content .tiptap > *:first-child {
+  margin-top: 0;
+}
+
+.rte-content .tiptap h2,
+.rte-content .tiptap h3 {
+  margin: 1.4em 0 0.5em;
+  line-height: 1.35;
+}
+
+.rte-content .tiptap p {
+  margin: 0 0 1em;
+}
+
+.rte-content .tiptap ul,
+.rte-content .tiptap ol {
+  padding-left: 1.6em;
+  margin-bottom: 1em;
+}
+
+.rte-content .tiptap blockquote {
+  margin: 1em 0;
+  padding-left: 16px;
+  border-left: 4px solid #d8ad45;
+  color: #59446c;
+}
+
+.rte-content .tiptap a {
+  color: #64378b;
+  text-decoration: underline;
+}
+
+.rte-content .tiptap p.is-editor-empty:first-child::before {
+  content: "Write your article here...";
+  float: left;
+  height: 0;
+  color: #887a94;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .rte-toolbar {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .rte-toolbar button {
+    padding: 7px 8px;
+    font-size: 0.8rem;
+  }
+
+  .rte-content {
+    padding: 14px;
+  }
+}

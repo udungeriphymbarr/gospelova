@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import AudioPlayer from "../components/AudioPlayer";
+import LoadingState from "../components/LoadingState";
 
 function SongDetails() {
   const { slug } = useParams();
@@ -99,7 +100,7 @@ function SongDetails() {
     return (
       <section className="page-section">
         <div className="container">
-          <p>Loading song details...</p>
+          <LoadingState message="Loading song details..." fullPage />
         </div>
       </section>
     );
@@ -107,10 +108,13 @@ function SongDetails() {
 
   if (error || !song) {
     return (
-      <section className="page-section">
+      <section className="page-section song-state-page">
         <div className="container">
-          <h1>{error ? "Unable to Load Song" : "Song Not Found"}</h1>
-          <p>
+          <h1 className="song-state-page__title">
+            {error ? "Unable to Load Song" : "Song Not Found"}
+          </h1>
+
+          <p className="song-state-page__message">
             {error ||
               "The song you're looking for doesn't exist or isn't published."}
           </p>

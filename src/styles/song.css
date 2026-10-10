@@ -335,3 +335,71 @@
     width: 100px;
   }
 }
+
+
+/* ================================
+   SONG DETAILS — ERROR STATES
+================================ */
+
+.song-state-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.song-state-page .container {
+  width: 100%;
+  max-width: 680px;
+  padding: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.song-state-page__title {
+  margin: 0 0 1rem;
+  color: var(--color-primary);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.2;
+}
+
+.song-state-page__message {
+  max-width: 500px;
+  margin: 0 auto 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.song-state-page .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.song-state-page .button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .song-state-page {
+    min-height: 45vh;
+    padding: 2.5rem 0;
+  }
+
+  .song-state-page .container {
+    padding: 1.75rem 1.25rem;
+  }
+}

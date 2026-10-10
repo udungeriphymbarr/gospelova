@@ -204,3 +204,334 @@
     transform: none;
   }
 }
+
+
+
+/* ========================================
+   GOSPELOVA CATEGORY DETAILS PAGE
+======================================== */
+
+.category-details-page {
+  min-height: 70vh;
+  padding: 56px 0 80px;
+  background: #fff;
+  color: #28153f;
+}
+
+.category-details-page .container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.category-details-page .category-back-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: var(--color-purple, #32145b);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.category-details-page .category-back-link:hover {
+  color: #765b1d;
+}
+
+.category-details-page .music-page__header {
+  margin-bottom: 36px;
+}
+
+.category-details-page .music-page__title {
+  color: var(--color-purple, #32145b);
+}
+
+.category-details-page .music-page__description {
+  color: #6d6577;
+}
+
+.category-details-page .music-page__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.category-details-page .music-page__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-details-page .music-page__actions {
+  margin-top: auto;
+}
+
+.category-details-page .category-details-message,
+.category-details-page .music-page__status {
+  padding: 28px 20px;
+  border: 1px solid #eee8f5;
+  border-left: 4px solid #d6b15e;
+  border-radius: 12px;
+  background: #f8f5fb;
+  color: #62556f;
+  line-height: 1.7;
+}
+
+.category-details-page .category-details-message h2 {
+  margin-top: 0;
+  color: #32145b;
+}
+
+.category-details-page .category-song-count {
+  margin-top: 24px;
+  color: #706778;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 900px) {
+  .category-details-page {
+    padding: 44px 0 64px;
+  }
+
+  .category-details-page .music-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .category-details-page {
+    padding: 32px 0 48px;
+  }
+
+  .category-details-page .container {
+    width: calc(100% - 32px);
+  }
+
+  .category-details-page .music-page__header {
+    margin-bottom: 26px;
+  }
+
+  .category-details-page .music-page__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .category-details-page .music-page__card {
+    padding: 14px;
+  }
+}
+
+
+
+/* Gospelova search page */
+.gospelova-search-page {
+  background: #fff;
+  color: #28153f;
+}
+
+.gospelova-search-form {
+  display: flex;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 0 36px;
+}
+
+.gospelova-search-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px 18px;
+  border: 1px solid #ded4e9;
+  border-radius: 12px;
+  background: #fff;
+  color: #28153f;
+  font: inherit;
+  outline: none;
+}
+
+.gospelova-search-form input:focus {
+  border-color: #32145b;
+  box-shadow: 0 0 0 3px rgba(50, 20, 91, 0.1);
+}
+
+.gospelova-search-form button {
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 12px;
+  background: #32145b;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gospelova-search-form button:hover {
+  background: #492272;
+}
+
+.gospelova-search-form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.gospelova-search-results-title {
+  margin: 0 0 22px;
+  color: #32145b;
+  font-size: 1.25rem;
+}
+
+.gospelova-search-page .music-page__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.gospelova-search-page .music-page__actions {
+  margin-top: auto;
+}
+
+@media (max-width: 560px) {
+  .gospelova-search-form {
+    flex-direction: column;
+  }
+
+  .gospelova-search-form button {
+    width: 100%;
+  }
+}
+
+
+/* Gospelova news and blog */
+.gospel-blog-page {
+  background: #fff;
+  color: #28153f;
+}
+
+.gospel-blog-page .music-page__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.gospel-blog-category {
+  margin: 0 0 10px;
+  color: #9b792d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gospel-blog-meta {
+  margin: 8px 0 12px;
+  color: #81768b;
+  font-size: 0.86rem;
+}
+
+.gospel-blog-excerpt {
+  margin: 0 0 18px;
+  color: #6d6577;
+  line-height: 1.7;
+}
+
+.gospel-blog-source {
+  margin: 0 0 16px;
+  color: #6d6577;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.gospel-blog-source a {
+  color: #492272;
+  text-decoration: underline;
+}
+
+.gospel-blog-page .music-page__actions {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.gospel-blog-retry {
+  display: block;
+  margin-top: 14px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #32145b;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/* Gospelova article reading page */
+.gospel-article-page {
+  background: #fff;
+  color: #28153f;
+}
+
+.gospel-article-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #492272;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gospel-article-back:hover {
+  text-decoration: underline;
+}
+
+.gospel-article {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.gospel-article-header {
+  margin-bottom: 30px;
+}
+
+.gospel-article-header .music-page__title {
+  margin-bottom: 18px;
+}
+
+.gospel-article-excerpt {
+  margin-bottom: 18px;
+}
+
+.gospel-article-meta {
+  color: #81768b;
+  font-size: 0.9rem;
+}
+
+.gospel-article-cover {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.gospel-article-content {
+  color: #453b50;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.gospel-article-content p {
+  margin: 0 0 22px;
+  white-space: pre-line;
+}
+
+.gospel-article-source {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee8f5;
+  color: #6d6577;
+  overflow-wrap: anywhere;
+}
+
+.gospel-article-source a {
+  color: #492272;
+  text-decoration: underline;
+}
+
+.gospel-article-footer {
+  margin-top: 35px;
+  padding-top: 24px;
+  border-top: 1px solid #eee8f5;
+}

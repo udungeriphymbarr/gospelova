@@ -403,3 +403,322 @@
     padding: 1.75rem 1.25rem;
   }
 }
+
+
+/* ========================================
+   SONG ACTION BUTTONS
+======================================== */
+
+.song-details__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.song-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ded5e8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #4b2470;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.song-action svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.song-action:hover {
+  border-color: #4b2470;
+  background: #f5effa;
+  transform: translateY(-1px);
+}
+
+.song-action:focus-visible {
+  outline: 3px solid #d6b15d;
+  outline-offset: 3px;
+}
+
+.song-action--download {
+  border-color: #4b2470;
+  background: #4b2470;
+  color: #ffffff;
+}
+
+.song-action--download:hover {
+  background: #381853;
+  color: #ffffff;
+}
+
+.song-action--share {
+  border-color: #d6b15d;
+  background: #fffaf0;
+  color: #4b2470;
+}
+
+.song-action--share:hover {
+  background: #f7edcf;
+}
+
+.song-action--whatsapp:hover {
+  border-color: #278b50;
+  background: #edf8f0;
+  color: #176c39;
+}
+
+/* ========================================
+   COPY / SHARE SUCCESS TOAST
+======================================== */
+
+.song-share-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.75rem 0 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d9c5e9;
+  border-left: 4px solid #4b2470;
+  border-radius: 10px;
+  background: #f7f1fc;
+  color: #381853;
+  box-shadow: 0 4px 14px rgb(44 20 65 / 8%);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  animation: song-toast-appear 0.2s ease-out;
+}
+
+.song-share-toast > svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #4b2470;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.song-share-toast > span {
+  flex: 1;
+}
+
+.song-share-toast button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #4b2470;
+  cursor: pointer;
+}
+
+.song-share-toast button:hover {
+  background: #eadcf5;
+}
+
+.song-share-toast button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Respect reduced-motion preferences */
+@keyframes song-toast-appear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .song-action,
+  .song-share-toast {
+    animation: none;
+    transition: none;
+  }
+
+  .song-action:hover {
+    transform: none;
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+  .song-details__actions {
+    gap: 0.55rem;
+  }
+
+  .song-action {
+    min-height: 44px;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .song-share-toast {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* Share section below the lyrics */
+.song-share-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e6dcec;
+  border-radius: 14px;
+  background: #faf7fd;
+}
+
+.song-share-section h2,
+.song-recommendations > h2 {
+  margin: 0 0 0.5rem;
+  color: #4b2470;
+}
+
+.song-share-section > p,
+.song-recommendations > p {
+  margin: 0 0 1rem;
+  color: #655b6d;
+  line-height: 1.6;
+}
+
+/* You might also like */
+.song-recommendations {
+  margin-top: 2.5rem;
+}
+
+.song-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.song-recommendations__card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e9e2ee;
+  border-radius: 12px;
+  background: #fff;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.song-recommendations__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgb(44 20 65 / 9%);
+}
+
+.song-recommendations__link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.song-recommendations__link img,
+.song-recommendations__placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #f0e8f6;
+}
+
+.song-recommendations__placeholder {
+  display: grid;
+  place-items: center;
+  color: #4b2470;
+  font-size: 2.5rem;
+}
+
+.song-recommendations__info {
+  padding: 0.85rem;
+}
+
+.song-recommendations__info h3 {
+  margin: 0 0 0.4rem;
+  color: #32164c;
+  font-size: 1rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.song-recommendations__info p {
+  margin: 0 0 0.5rem;
+  color: #655b6d;
+  font-size: 0.88rem;
+}
+
+.song-recommendations__info span {
+  color: #7b5b93;
+  font-size: 0.78rem;
+}
+
+.song-recommendations__link:focus-visible {
+  outline: 3px solid #d6b15d;
+  outline-offset: -3px;
+}
+
+@media (max-width: 900px) {
+  .song-recommendations__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .song-share-section {
+    padding: 1rem;
+  }
+
+  .song-recommendations__grid {
+    gap: 0.75rem;
+  }
+
+  .song-recommendations__info {
+    padding: 0.65rem;
+  }
+}

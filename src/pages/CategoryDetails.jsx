@@ -84,8 +84,8 @@ function CategoryDetails() {
     <section className="page category-details-page">
       <div className="container">
         <p>
-          <Link to="/categories" className="category-back-link">
-            ← All Categories
+          <Link to="/music" className="category-back-link">
+            ← Discover Latest Musics
           </Link>
         </p>
 

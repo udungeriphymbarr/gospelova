@@ -97,8 +97,7 @@ function Music() {
                       .from("song-cover")
                       .getPublicUrl(song.cover_image_path).data.publicUrl
                   : null;
-                console.log("Song:", song.title);
-                console.log("Generated cover URL:", coverUrl);
+
                 return (
                   <article className="music-page__card" key={song.id}>
                     {coverUrl ? (
@@ -153,4 +152,5 @@ function Music() {
     </>
   );
 }
+
 export default Music;

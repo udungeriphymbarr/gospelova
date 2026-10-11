@@ -33,10 +33,31 @@ function Navbar() {
         </nav>
 
         <div className="navbar__actions">
-          {/* Desktop Search */}
-          <button className="navbar__search" type="button" aria-label="Search">
-            🔍
-          </button>
+          {/* Dedicated Search Icon */}
+          <Link
+            to="/search"
+            className="navbar__search-button"
+            aria-label="Search Gospelova"
+            title="Search"
+            onClick={closeMenu}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-4-4" />
+            </svg>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
@@ -74,10 +95,6 @@ function Navbar() {
 
         <Link to="/blog" onClick={closeMenu}>
           Gospel News
-        </Link>
-
-        <Link to="/search" onClick={closeMenu}>
-          🔍 Search
         </Link>
       </nav>
     </header>

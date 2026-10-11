@@ -128,12 +128,6 @@ function Music() {
                       By {song.artists?.name ?? "Unknown artist"}
                     </p>
 
-                    {song.description && (
-                      <p className="music-page__description">
-                        {song.description}
-                      </p>
-                    )}
-
                     <div className="music-page__actions">
                       <Link
                         to={`/music/${song.slug}`}

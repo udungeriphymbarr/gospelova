@@ -38,17 +38,6 @@ function SongCard({ title, artist, image, slug, audioUrl }) {
           <Link to={`/music/${slug}`} className="song-card__details">
             View Song
           </Link>
-
-          {audioUrl && (
-            <a
-              href={audioUrl}
-              download
-              className="song-card__download"
-              aria-label={`Download ${title}`}
-            >
-              ↓
-            </a>
-          )}
         </div>
       </div>
     </article>

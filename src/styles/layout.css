@@ -78,6 +78,39 @@
 }
 
 
+/* Dedicated search icon in the navbar */
+.navbar__search-button {
+  display: none; /* Hidden on desktop by default */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: 50%;
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+.navbar__search-button:hover {
+  color: var(--color-gold);
+  background-color: var(--color-surface);
+}
+
+.navbar__search-button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.navbar__search-button svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+
 /* =========================
    HOME HERO
 ========================= */
@@ -609,6 +642,23 @@
     color: var(--color-gold);
   }
 
+  
+/* Keep search visible outside the mobile menu */
+.navbar__search-button {
+  display: inline-flex;
+}
+
+.navbar__actions {
+  gap: 0.5rem;
+}
+
+.navbar__menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
   .home__hero {
     min-height: 560px;
   }
@@ -862,7 +912,6 @@
 }
 
 
-
 /* Copyright Page */
 
 .copyright-page {
@@ -969,3 +1018,4 @@
     font-size: 1.15rem;
   }
 }
+

@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
+import { supabase } from "../lib/supabase";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
+import Image from "@tiptap/extension-image";
 import "../styles/rich-text-editor.css";
 
 function normalizeContent(value) {
@@ -35,6 +37,10 @@ function RichTextEditor({ value, onChange, disabled = false }) {
         openOnClick: false,
         autolink: true,
         defaultProtocol: "https",
+      }),
+      Image.configure({
+        inline: false,
+        allowBase64: false,
       }),
     ],
     content: value || "",
@@ -144,6 +150,64 @@ function RichTextEditor({ value, onChange, disabled = false }) {
     },
   ];
 
+  async function addImage(event) {
+    const file = event.target.files?.[0];
+
+    // Allow the user to cancel or choose no file.
+    if (!file || !editor) return;
+
+    if (!file.type.startsWith("image/")) {
+      window.alert("Please select a valid image file.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      window.alert("Please select an image smaller than 5 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    try {
+      const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+      const imagePath = `blog/content/${crypto.randomUUID()}.${extension}`;
+
+      const { error } = await supabase.storage
+        .from("song-cover")
+        .upload(imagePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: file.type,
+        });
+
+      if (error) throw error;
+
+      const { data } = supabase.storage
+        .from("song-cover")
+        .getPublicUrl(imagePath);
+
+      if (!data?.publicUrl) {
+        throw new Error("Could not retrieve the uploaded image URL.");
+      }
+
+      editor
+        .chain()
+        .focus()
+        .setImage({
+          src: data.publicUrl,
+          alt: file.name.replace(/\.[^/.]+$/, ""),
+        })
+        .run();
+    } catch (error) {
+      console.error("Article image upload failed:", error);
+      window.alert(
+        error.message || "Could not upload the image. Please try again.",
+      );
+    } finally {
+      event.target.value = "";
+    }
+  }
+
   return (
     <div className="rte">
       <div
@@ -151,6 +215,17 @@ function RichTextEditor({ value, onChange, disabled = false }) {
         role="toolbar"
         aria-label="Article formatting"
       >
+        <label className="rte-image-upload">
+          Insert Image
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            disabled={disabled}
+            onChange={addImage}
+          />
+        </label>
+
         {tools.map((tool) => (
           <button
             key={tool.label}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import "../styles/admin.css";
+import RichTextEditor from "../components/RichTextEditor";
 
 function makeSlug(value) {
   return value
@@ -296,12 +297,15 @@ function AddSong() {
         </select>
 
         <label htmlFor="song-description">Description</label>
-        <textarea
-          id="song-description"
-          name="description"
-          rows="3"
+        <RichTextEditor
           value={form.description}
-          onChange={updateField}
+          onChange={(html) =>
+            setForm((current) => ({
+              ...current,
+              description: html,
+            }))
+          }
+          placeholder="Write a song description..."
         />
 
         <label htmlFor="song-lyrics">Lyrics</label>

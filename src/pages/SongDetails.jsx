@@ -4,6 +4,14 @@ import { supabase } from "../lib/supabase";
 import AudioPlayer from "../components/AudioPlayer";
 import LoadingState from "../components/LoadingState";
 import SEO from "../components/SEO";
+import DOMPurify from "dompurify";
+
+function stripHtml(html = "") {
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 function SongDetails() {
   const { slug } = useParams();
@@ -225,7 +233,7 @@ function SongDetails() {
   const category = song.categories?.name ?? "Gospel Music";
 
   const seoDescription =
-    song.description?.trim() ||
+    stripHtml(song.description) ||
     `Discover ${song.title} by ${artist} on Gospelova. Listen to the song, download gospel music, and explore the lyrics.`;
 
   return (
@@ -267,7 +275,12 @@ function SongDetails() {
               )}
 
               {song.description && (
-                <p className="song-details__description">{song.description}</p>
+                <div
+                  className="song-details__description rich-text-content"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(song.description),
+                  }}
+                />
               )}
 
               <div className="song-details__actions">

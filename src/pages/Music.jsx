@@ -23,6 +23,7 @@ function Music() {
           description,
           cover_image_path,
           created_at,
+          artist_name,
           artists ( name ),
           categories ( name )
         `,
@@ -125,7 +126,10 @@ function Music() {
                     <h2 className="music-page__song-title">{song.title}</h2>
 
                     <p className="music-page__artist">
-                      By {song.artists?.name ?? "Unknown artist"}
+                      By{" "}
+                      {song.artists?.name ||
+                        song.artist_name ||
+                        "Unknown artist"}
                     </p>
 
                     <div className="music-page__actions">

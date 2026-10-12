@@ -28,6 +28,7 @@ function ManageSongs() {
     slug,
     is_published,
     created_at,
+    artist_name,
     artists ( name ),
     categories ( name )
   `,
@@ -244,7 +245,11 @@ function ManageSongs() {
                       <small>{song.slug}</small>
                     </td>
 
-                    <td>{song.artists?.name || "Unknown artist"}</td>
+                    <td>
+                      {song.artists?.name ||
+                        song.artist_name ||
+                        "Unknown artist"}
+                    </td>
 
                     <td>{song.categories?.name || "Uncategorized"}</td>
 

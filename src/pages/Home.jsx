@@ -37,6 +37,7 @@ function Home() {
           slug,
           cover_image_path,
           audio_path,
+          artist_name,
           artists ( name )
         `,
         )
@@ -264,7 +265,9 @@ function Home() {
                   <SongCard
                     key={song.id}
                     title={song.title}
-                    artist={song.artists?.name ?? "Unknown artist"}
+                    artist={
+                      song.artists?.name || song.artist_name || "Unknown artist"
+                    }
                     image={coverUrl}
                     audioUrl={song.audio_path}
                     slug={song.slug}

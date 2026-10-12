@@ -47,6 +47,7 @@ function SongDetails() {
           cover_image_path,
           release_date,
           created_at,
+          artist_name,
           artists ( name ),
           categories ( name )
         `,
@@ -81,6 +82,7 @@ function SongDetails() {
       title,
       slug,
       cover_image_path,
+      artist_name,
       artists ( name ),
       categories ( name )
     `,
@@ -103,6 +105,23 @@ function SongDetails() {
       }
 
       if (data.audio_path) {
+        const audioExtension =
+          data.audio_path.split(".").pop()?.toLowerCase() || "mp3";
+
+        const safeArtist = (
+          data.artists?.name ||
+          data.artist_name ||
+          "Unknown Artist"
+        )
+          .replace(/[<>:"/\\|?*\x00-\x1F]/g, "")
+          .trim();
+
+        const safeTitle = (data.title || "Gospelova Song")
+          .replace(/[<>:"/\\|?*\x00-\x1F]/g, "")
+          .trim();
+
+        const downloadFilename = `${safeArtist} - ${safeTitle}.${audioExtension}`;
+
         const [playerResult, downloadResult] = await Promise.all([
           supabase.storage
             .from("song-audio")
@@ -111,7 +130,7 @@ function SongDetails() {
           supabase.storage
             .from("song-audio")
             .createSignedUrl(data.audio_path, 3600, {
-              download: true,
+              download: downloadFilename,
             }),
         ]);
 
@@ -153,7 +172,7 @@ function SongDetails() {
 
   async function shareSong() {
     const url = window.location.href;
-    const artist = song.artists?.name ?? "Unknown artist";
+    const artist = song.artists?.name || song.artist_name || "Unknown artist";
 
     const shareData = {
       title: `${song.title} | Gospelova`,
@@ -176,7 +195,7 @@ function SongDetails() {
 
   function shareToWhatsApp() {
     const url = window.location.href;
-    const artist = song.artists?.name ?? "Unknown artist";
+    const artist = song.artists?.name || song.artist_name || "Unknown artist";
 
     const message = `Listen to "${song.title}" by ${artist} on Gospelova!\n\n${url}`;
 
@@ -229,7 +248,7 @@ function SongDetails() {
       })
     : null;
 
-  const artist = song.artists?.name ?? "Unknown artist";
+  const artist = song.artists?.name || song.artist_name || "Unknown artist";
   const category = song.categories?.name ?? "Gospel Music";
 
   const seoDescription =

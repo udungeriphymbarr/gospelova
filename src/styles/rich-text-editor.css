@@ -74,7 +74,17 @@
 }
 
 .rte-content .tiptap p {
-  margin: 0 0 1em;
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  line-height: 1.5
+}
+
+.rte-content .tiptap img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.2em 0;
+  border-radius: 8px;
 }
 
 .rte-content .tiptap ul,

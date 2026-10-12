@@ -10,6 +10,7 @@ function EditSong() {
   const [form, setForm] = useState({
     title: "",
     artist_id: "",
+    artist_name: "",
     category_id: "",
     description: "",
     lyrics: "",
@@ -50,6 +51,7 @@ function EditSong() {
           setForm({
             title: song.title ?? "",
             artist_id: song.artist_id ?? "",
+            artist_name: song.artist_name ?? "",
             category_id: song.category_id ?? "",
             description: song.description ?? "",
             lyrics: song.lyrics ?? "",
@@ -126,6 +128,7 @@ function EditSong() {
       const updateData = {
         title: form.title.trim(),
         artist_id: form.artist_id || null,
+        artist_name: form.artist_name.trim() || null,
         category_id: form.category_id || null,
         description: form.description.trim() || null,
         lyrics: form.lyrics.trim() || null,
@@ -285,19 +288,34 @@ function EditSong() {
         />
 
         <label htmlFor="edit-artist">Artist</label>
-        <select
+
+        <input
           id="edit-artist"
-          name="artist_id"
-          value={form.artist_id}
-          onChange={handleChange}
-        >
-          <option value="">Select artist</option>
+          type="text"
+          name="artist_name"
+          list="edit-artist-options"
+          value={form.artist_name}
+          onChange={(event) => {
+            const value = event.target.value;
+            const matchedArtist = artists.find(
+              (artist) =>
+                artist.name.toLowerCase() === value.trim().toLowerCase(),
+            );
+
+            setForm((current) => ({
+              ...current,
+              artist_name: value,
+              artist_id: matchedArtist ? matchedArtist.id : "",
+            }));
+          }}
+          placeholder="Type or select an artist name"
+        />
+
+        <datalist id="edit-artist-options">
           {artists.map((artist) => (
-            <option key={artist.id} value={artist.id}>
-              {artist.name}
-            </option>
+            <option key={artist.id} value={artist.name} />
           ))}
-        </select>
+        </datalist>
 
         <label htmlFor="edit-category">Category</label>
         <select

@@ -195,6 +195,7 @@ function AddSong() {
         title: form.title.trim(),
         slug,
         artist_id: form.artist_id || null,
+        artist_name: form.artist_name.trim() || null,
         category_id: form.category_id || null,
         description: form.description.trim() || null,
         lyrics: form.lyrics.trim() || null,
@@ -265,20 +266,35 @@ function AddSong() {
         />
 
         <label htmlFor="song-artist">Artist</label>
-        <select
+
+        <input
           id="song-artist"
-          name="artist_id"
-          value={form.artist_id}
-          onChange={updateField}
+          type="text"
+          name="artist_name"
+          list="song-artist-options"
+          value={form.artist_name}
+          onChange={(event) => {
+            const value = event.target.value;
+            const matchedArtist = artists.find(
+              (artist) =>
+                artist.name.toLowerCase() === value.trim().toLowerCase(),
+            );
+
+            setForm((current) => ({
+              ...current,
+              artist_name: value,
+              artist_id: matchedArtist ? matchedArtist.id : "",
+            }));
+          }}
+          placeholder="Type or select an artist name"
           disabled={loadingOptions}
-        >
-          <option value="">Select artist</option>
+        />
+
+        <datalist id="song-artist-options">
           {artists.map((artist) => (
-            <option key={artist.id} value={artist.id}>
-              {artist.name}
-            </option>
+            <option key={artist.id} value={artist.name} />
           ))}
-        </select>
+        </datalist>
 
         <label htmlFor="song-category">Category</label>
         <select

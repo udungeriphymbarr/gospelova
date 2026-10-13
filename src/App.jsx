@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import Copyright from "./pages/Copyright";
 import SongDetails from "./pages/SongDetails";
 import ArtistDetails from "./pages/ArtistDetails";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -36,6 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <GoogleAnalytics />
       <Routes>
         {/* Admin routes: outside the public website layout */}
 

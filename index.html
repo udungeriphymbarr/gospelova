@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,6 +19,22 @@
     <!-- App identity -->
     <meta name="application-name" content="Gospelova" />
 
+    <!-- Google Analytics 4 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N5195NEWX2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", "G-N5195NEWX2", {
+        send_page_view: false,
+    });
+    </script>
   </head>
   <body>
     <div id="root"></div>

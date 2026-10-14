@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../styles/CookieConsent.css";
+import "../styles/cookieconsent.css";
 
 const CONSENT_KEY = "gospelova_cookie_consent";
 

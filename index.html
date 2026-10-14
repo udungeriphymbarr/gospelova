@@ -24,18 +24,35 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-N5195NEWX2"
     ></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         window.dataLayer.push(arguments);
       }
+
       window.gtag = gtag;
+
+      // Default consent before analytics configuration
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        functionality_storage: "granted",
+        security_storage: "granted"
+      });
+
       gtag("js", new Date());
+
+      // React handles page views separately
       gtag("config", "G-N5195NEWX2", {
-        send_page_view: false,
-    });
+        send_page_view: false
+      });
     </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

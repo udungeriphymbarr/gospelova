@@ -8,7 +8,7 @@ import Music from "./pages/Music";
 import Lyrics from "./pages/Lyrics";
 import Artists from "./pages/Artists";
 import CategoryDetails from "./pages/CategoryDetails";
-
+import Privacy from "./pages/Privacy";
 import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
@@ -17,6 +17,7 @@ import Copyright from "./pages/Copyright";
 import SongDetails from "./pages/SongDetails";
 import ArtistDetails from "./pages/ArtistDetails";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import CookieConsent from "./components/CookieConsent";
 
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -38,6 +39,8 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <GoogleAnalytics />
+      <CookieConsent />
+
       <Routes>
         {/* Admin routes: outside the public website layout */}
 
@@ -181,7 +184,7 @@ function App() {
                 <Route path="/artists" element={<Artists />} />
                 <Route path="/artists/:slug" element={<ArtistDetails />} />
                 <Route path="/categories/:slug" element={<CategoryDetails />} />
-
+                <Route path="/privacy" element={<Privacy />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetails />} />
                 <Route path="/search" element={<Search />} />

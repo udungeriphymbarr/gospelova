@@ -16,6 +16,7 @@ function Footer() {
           <Link to="/blog">Gospel News</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/copyright">Copyright</Link>
+          <Link to="/privacy">Privacy Policy</Link>
         </nav>
       </div>
 

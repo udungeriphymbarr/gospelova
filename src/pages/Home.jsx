@@ -237,13 +237,7 @@ function Home() {
           />
 
           {songsLoading && (
-            <p>
-              Loading latest gospel song
-              {songsLoading && (
-                <LoadingState message="Loading latest gospel songs..." />
-              )}
-              s...
-            </p>
+            <LoadingState message="Loading latest gospel songs..." />
           )}
 
           {songsError && <p role="alert">{songsError}</p>}

@@ -7,6 +7,7 @@
 @import "./styles/contact.css";
 @import "./styles/rich-text-editor.css";
 @import "./styles/loading-state.css";
+@import "./styles/privacy.css";
 
 * {
   margin: 0;

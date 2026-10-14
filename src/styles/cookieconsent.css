@@ -1,0 +1,194 @@
+
+/* Compact Gospelova cookie banner */
+.cookie-banner {
+  position: fixed;
+  z-index: 10000;
+  right: 16px;
+  bottom: 16px;
+  width: min(420px, calc(100% - 32px));
+  max-height: 75vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 18px;
+  border: 1px solid #e2bb59;
+  border-radius: 12px;
+  background: #28153f;
+  color: #ffffff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  animation: gospelovaCookieEnter 350ms ease-out both;
+}
+
+.cookie-banner__content h2 {
+  margin: 0 0 8px;
+  padding-right: 24px;
+  color: #e2bb59;
+  font-size: 1.15rem;
+}
+
+.cookie-banner__content p {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.cookie-banner a {
+  color: #f3d77e;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.cookie-banner button,
+.cookie-reopen {
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 1px solid #e2bb59;
+  border-radius: 7px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.cookie-banner__actions button:first-child,
+.cookie-settings > .cookie-banner__actions button:first-child {
+  background: #e2bb59;
+  color: #28153f;
+  font-weight: 700;
+}
+
+.cookie-banner button:hover,
+.cookie-reopen:hover {
+  filter: brightness(1.1);
+}
+
+.cookie-settings {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(226, 187, 89, 0.5);
+}
+
+.cookie-settings h3 {
+  margin: 0 0 10px;
+  color: #e2bb59;
+  font-size: 1rem;
+}
+
+.cookie-settings p {
+  color: #ffffff;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.cookie-settings label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  color: #ffffff;
+  font-size: 0.85rem;
+}
+
+.cookie-settings input {
+  accent-color: #e2bb59;
+}
+
+.cookie-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  min-height: 28px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: 1.4rem !important;
+  line-height: 1;
+}
+
+.cookie-banner--closing {
+  animation: gospelovaCookieExit 250ms ease-in both;
+  pointer-events: none;
+}
+
+.cookie-reopen {
+  position: fixed;
+  z-index: 9999;
+  right: 12px;
+  bottom: 12px;
+  min-height: 32px;
+  padding: 7px 11px;
+  border-radius: 8px 8px 0 0;
+  background: #28153f;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  animation: gospelovaCookieEnter 250ms ease-out both;
+}
+
+@keyframes gospelovaCookieEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gospelovaCookieExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    right: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    padding: 14px;
+  }
+
+  .cookie-banner__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cookie-banner__actions button {
+    width: 100%;
+    padding: 8px 6px;
+    font-size: 0.78rem;
+  }
+
+  .cookie-banner__actions button:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner,
+  .cookie-banner--closing,
+  .cookie-reopen {
+    animation: none !important;
+  }
+}

@@ -1,4 +1,4 @@
-import "../styles/Privacy.css";
+import "../styles/privacy.css";
 
 export default function Privacy() {
   const lastUpdated = "October 14, 2026";

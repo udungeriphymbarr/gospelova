@@ -12,6 +12,7 @@ function SEO({
   url,
   type = "website",
   noIndex = false,
+  structuredData,
 }) {
   const pageTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
 
@@ -50,6 +51,12 @@ function SEO({
       <meta name="twitter:description" content={description} />
 
       {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 }

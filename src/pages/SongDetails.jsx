@@ -283,6 +283,20 @@ function SongDetails() {
         image={coverUrl || undefined}
         url={`/music/${song.slug}`}
         type="music.song"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "MusicRecording",
+          name: song.title,
+          byArtist: {
+            "@type": "MusicGroup",
+            name: artist,
+          },
+          url: `${window.location.origin}/music/${song.slug}`,
+          ...(coverUrl && { image: coverUrl }),
+          ...(song.release_date && {
+            datePublished: song.release_date,
+          }),
+        }}
       />
 
       <section className="song-details">

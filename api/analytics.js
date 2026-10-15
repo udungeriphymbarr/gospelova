@@ -16,10 +16,10 @@ function getGoogleCredentials() {
 
 function getSupabaseAdminClient() {
   const supabaseUrl = process.env.VITE_SUPABASE_URL;
-  const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  const supabaseKey = process.env.SUPABASE_SECRET_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    throw new Error("Missing Supabase environment variables.");
+    throw new Error("Missing server-side Supabase environment variables.");
   }
 
   return createClient(supabaseUrl, supabaseKey, {

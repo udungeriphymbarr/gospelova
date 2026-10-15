@@ -22,6 +22,10 @@ function AdminDashboard() {
   const [downloadsLoading, setDownloadsLoading] = useState(true);
   const [downloadsError, setDownloadsError] = useState("");
 
+  const [analytics, setAnalytics] = useState(null);
+  const [analyticsLoading, setAnalyticsLoading] = useState(true);
+  const [analyticsError, setAnalyticsError] = useState("");
+
   useEffect(() => {
     let active = true;
 
@@ -126,6 +130,47 @@ function AdminDashboard() {
             totalDownloads: downloadsResult.count ?? 0,
           });
           setStatsError("");
+        }
+
+        // Load GA4 reports separately so analytics errors
+        // do not affect the existing Supabase dashboard stats.
+        try {
+          const accessToken = sessionData.session?.access_token;
+
+          if (!accessToken) {
+            throw new Error("No active session token.");
+          }
+
+          const response = await fetch("/api/analytics", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+          const report = await response.json();
+
+          if (!response.ok) {
+            throw new Error(report.error || "Unable to load Google Analytics.");
+          }
+
+          if (active) {
+            setAnalytics(report);
+            setAnalyticsError("");
+          }
+        } catch (error) {
+          console.error("Google Analytics dashboard request failed:", error);
+
+          if (active) {
+            setAnalytics(null);
+            setAnalyticsError(
+              "Unable to load visitor analytics. Please try again later.",
+            );
+          }
+        } finally {
+          if (active) {
+            setAnalyticsLoading(false);
+          }
         }
       } catch (error) {
         if (active) {
@@ -256,6 +301,74 @@ function AdminDashboard() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="admin-stats-section">
+        <div className="admin-stats-heading">
+          <div>
+            <h2>Website Analytics</h2>
+            <p>Google Analytics reports for the last 30 days.</p>
+          </div>
+        </div>
+
+        {analyticsError && (
+          <p className="admin-stats-error" role="alert">
+            {analyticsError}
+          </p>
+        )}
+
+        {analyticsLoading ? (
+          <p>Loading website analytics...</p>
+        ) : analytics ? (
+          <>
+            <div className="admin-stats-grid">
+              {[
+                {
+                  label: "Active Users",
+                  value: analytics.overview.activeUsers,
+                },
+                {
+                  label: "Total Users",
+                  value: analytics.overview.totalUsers,
+                },
+                {
+                  label: "Sessions",
+                  value: analytics.overview.sessions,
+                },
+                {
+                  label: "Page Views",
+                  value: analytics.overview.pageViews,
+                },
+              ].map((stat) => (
+                <article className="admin-stat-card" key={stat.label}>
+                  <p>{stat.label}</p>
+                  <strong>{stat.value.toLocaleString()}</strong>
+                </article>
+              ))}
+            </div>
+
+            <h3>Top Pages</h3>
+
+            {analytics.topPages.length === 0 ? (
+              <p>No page-view data is available for this period yet.</p>
+            ) : (
+              <div className="admin-top-downloads">
+                {analytics.topPages.map((page) => (
+                  <article
+                    className="admin-top-download-item"
+                    key={page.pagePath}
+                  >
+                    <div>
+                      <strong>{page.pagePath}</strong>
+                      <p>{page.activeUsers.toLocaleString()} active users</p>
+                    </div>
+                    <span>{page.pageViews.toLocaleString()} views</span>
+                  </article>
+                ))}
+              </div>
+            )}
+          </>
+        ) : null}
       </section>
 
       <section className="admin-stats-section">

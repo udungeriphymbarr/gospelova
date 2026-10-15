@@ -13,6 +13,45 @@ function stripHtml(html = "") {
     .trim();
 }
 
+function getYouTubeEmbedUrl(url = "") {
+  try {
+    const parsedUrl = new URL(url);
+
+    const allowedHosts = [
+      "youtube.com",
+      "www.youtube.com",
+      "m.youtube.com",
+      "youtu.be",
+    ];
+
+    if (!allowedHosts.includes(parsedUrl.hostname.toLowerCase())) {
+      return null;
+    }
+
+    let videoId = "";
+
+    if (parsedUrl.hostname.toLowerCase() === "youtu.be") {
+      videoId = parsedUrl.pathname.split("/").filter(Boolean)[0] || "";
+    } else if (parsedUrl.pathname === "/watch") {
+      videoId = parsedUrl.searchParams.get("v") || "";
+    } else {
+      const match = parsedUrl.pathname.match(
+        /^\/(?:embed|shorts)\/([A-Za-z0-9_-]{11})\/?$/,
+      );
+
+      videoId = match?.[1] || "";
+    }
+
+    if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+      return null;
+    }
+
+    return `https://www.youtube.com/embed/${videoId}`;
+  } catch {
+    return null;
+  }
+}
+
 function SongDetails() {
   const { slug } = useParams();
 
@@ -42,6 +81,7 @@ function SongDetails() {
           title,
           slug,
           description,
+          youtube_url,
           lyrics,
           audio_path,
           cover_image_path,
@@ -370,6 +410,23 @@ function SongDetails() {
 
               {song.audio_path && !audioUrl && (
                 <p>Audio is temporarily unavailable. Please try again later.</p>
+              )}
+
+              {song.youtube_url && getYouTubeEmbedUrl(song.youtube_url) && (
+                <div className="song-details__video">
+                  <h2>Watch the Music Video</h2>
+
+                  <div className="song-details__video-frame">
+                    <iframe
+                      src={getYouTubeEmbedUrl(song.youtube_url)}
+                      title={`${song.title} official music video`}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
               )}
             </div>
           </div>

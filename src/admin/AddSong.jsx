@@ -25,10 +25,12 @@ function AddSong() {
   const [form, setForm] = useState({
     title: "",
     artist_id: "",
+    artist_name: "",
     category_id: "",
     description: "",
     lyrics: "",
     release_date: "",
+    youtube_url: "",
     is_published: false,
   });
 
@@ -200,6 +202,7 @@ function AddSong() {
         description: form.description.trim() || null,
         lyrics: form.lyrics.trim() || null,
         release_date: form.release_date || null,
+        youtube_url: form.youtube_url.trim() || null,
         cover_image_path: uploadedCoverPath,
         audio_path: uploadedAudioPath,
         is_published: form.is_published,
@@ -322,6 +325,16 @@ function AddSong() {
             }))
           }
           placeholder="Write a song description..."
+        />
+
+        <label htmlFor="song-youtube-url">YouTube video URL (optional)</label>
+        <input
+          id="song-youtube-url"
+          type="url"
+          name="youtube_url"
+          value={form.youtube_url}
+          onChange={updateField}
+          placeholder="https://www.youtube.com/watch?v=..."
         />
 
         <label htmlFor="song-lyrics">Lyrics</label>

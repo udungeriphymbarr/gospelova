@@ -15,6 +15,7 @@ function EditSong() {
     description: "",
     lyrics: "",
     release_date: "",
+    youtube_url: "",
     is_published: false,
   });
 
@@ -56,6 +57,7 @@ function EditSong() {
             description: song.description ?? "",
             lyrics: song.lyrics ?? "",
             release_date: song.release_date ?? "",
+            youtube_url: song.youtube_url ?? "",
             is_published: song.is_published ?? false,
           });
           setArtists(artistData ?? []);
@@ -133,6 +135,7 @@ function EditSong() {
         description: form.description.trim() || null,
         lyrics: form.lyrics.trim() || null,
         release_date: form.release_date || null,
+        youtube_url: form.youtube_url.trim() || null,
         is_published: form.is_published,
       };
 
@@ -357,6 +360,16 @@ function EditSong() {
           type="date"
           value={form.release_date}
           onChange={handleChange}
+        />
+
+        <label htmlFor="edit-youtube-url">YouTube video URL (optional)</label>
+        <input
+          id="edit-youtube-url"
+          type="url"
+          name="youtube_url"
+          value={form.youtube_url}
+          onChange={handleChange}
+          placeholder="https://www.youtube.com/watch?v=..."
         />
 
         <label htmlFor="edit-cover">Replace cover image (optional)</label>

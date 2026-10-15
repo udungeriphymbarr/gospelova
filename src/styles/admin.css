@@ -1350,3 +1350,132 @@
     text-align: center;
   }
 }
+
+
+/* Admin dashboard statistics */
+.admin-stats-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(226, 187, 89, 0.2);
+  border-radius: 16px;
+  background: #211432;
+  color: #fff;
+}
+
+.admin-stats-heading {
+  margin-bottom: 1.25rem;
+}
+
+.admin-stats-heading h2 {
+  margin: 0 0 0.4rem;
+  color: #e2bb59;
+}
+
+.admin-stats-heading p {
+  margin: 0;
+  color: #d0c8d9;
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 1rem;
+}
+
+.admin-stat-card {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: #2b1b40;
+}
+
+.admin-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  background: rgba(226, 187, 89, 0.12);
+  color: #e2bb59;
+  font-size: 1.4rem;
+}
+
+.admin-stat-card p {
+  margin: 0 0 0.6rem;
+  color: #d0c8d9;
+  font-size: 0.9rem;
+}
+
+.admin-stat-card strong {
+  display: block;
+  color: #fff;
+  font-size: 1.8rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-stats-error {
+  margin-bottom: 1rem;
+  color: #ffb4ab;
+}
+
+.admin-top-downloads {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-top-download-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(184, 154, 74, 0.25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-top-download-item > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(184, 154, 74, 0.15);
+  color: #b89a4a;
+  font-weight: 700;
+}
+
+.admin-top-download-item > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-top-download-item strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.admin-top-download-item p {
+  margin: 5px 0 0;
+  opacity: 0.75;
+  font-size: 0.875rem;
+}
+
+.admin-top-download-item a {
+  color: #b89a4a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .admin-top-download-item {
+    flex-wrap: wrap;
+  }
+
+  .admin-top-download-item a {
+    margin-left: 46px;
+  }
+}

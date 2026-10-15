@@ -255,6 +255,26 @@ function SongDetails() {
     stripHtml(song.description) ||
     `Discover ${song.title} by ${artist} on Gospelova. Listen to the song, download gospel music, and explore the lyrics.`;
 
+  const handleSongDownload = async (event) => {
+    event.preventDefault();
+
+    if (!downloadUrl || !song?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from("song_downloads")
+        .insert({ song_id: song.id });
+
+      if (error) {
+        console.error("Download tracking failed:", error);
+      }
+    } catch (error) {
+      console.error("Download tracking failed:", error);
+    } finally {
+      window.location.assign(downloadUrl);
+    }
+  };
+
   return (
     <>
       <SEO
@@ -304,7 +324,11 @@ function SongDetails() {
 
               <div className="song-details__actions">
                 {downloadUrl && (
-                  <a href={downloadUrl} className="button button--outline">
+                  <a
+                    href={downloadUrl}
+                    className="button button--outline"
+                    onClick={handleSongDownload}
+                  >
                     <svg
                       viewBox="0 0 24 24"
                       width="19"

@@ -278,7 +278,7 @@ function SongDetails() {
   return (
     <>
       <SEO
-        title={`${song.title} by ${artist}`}
+        title={`${artist} - ${song.title}`}
         description={seoDescription}
         image={coverUrl || undefined}
         url={`/music/${song.slug}`}

@@ -128,7 +128,6 @@ const safeStructuredData = JSON.stringify(structuredData).replace(
 
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
-    res.setHeader("X-Robots-Tag", "noindex, follow");
 
     if (req.method === "HEAD") {
       return res.status(200).end();

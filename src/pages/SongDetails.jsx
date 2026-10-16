@@ -160,9 +160,7 @@ function SongDetails() {
           .replace(/[<>:"/\\|?*\x00-\x1F]/g, "")
           .trim();
 
-        const downloadFilename = `${decodeURIComponent(
-          `${safeArtist} - ${safeTitle}`,
-        )}.${audioExtension}`;
+        const downloadFilename = `${safeArtist} - ${safeTitle}.${audioExtension}`;
 
         const [playerResult, downloadResult] = await Promise.all([
           supabase.storage

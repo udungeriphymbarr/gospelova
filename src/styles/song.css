@@ -101,6 +101,12 @@
   line-height: 1.8;
 }
 
+.song-details__description a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+ 
+}
 
 .song-details__description p {
   margin-top: 0;

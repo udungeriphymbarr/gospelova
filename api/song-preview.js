@@ -79,6 +79,25 @@ export default async function handler(req, res) {
 
     const canonical = `${SITE_URL}/music/${encodeURIComponent(song.slug)}`;
 
+    
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  name: song.title,
+  byArtist: {
+    "@type": "Person",
+    name: artist,
+  },
+  url: canonical,
+  ...(image && { image }),
+};
+
+const safeStructuredData = JSON.stringify(structuredData).replace(
+  /</g,
+  "\\u003c"
+);
+
+
     const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -98,6 +117,7 @@ export default async function handler(req, res) {
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${escapeHtml(image)}">
+  <script type="application/ld+json">${safeStructuredData}</script>
 </head>
 <body>
   <p>Opening ${escapeHtml(song.title)} on Gospelova…</p>

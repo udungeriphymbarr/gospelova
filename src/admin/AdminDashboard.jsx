@@ -271,6 +271,10 @@ function AdminDashboard() {
           <Link to="/admin/messages" className="admin-action-button">
             Manage Messages
           </Link>
+
+          <Link to="/admin/comments" className="admin-action-button">
+            Manage Comments
+          </Link>
         </div>
       </section>
 

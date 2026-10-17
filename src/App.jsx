@@ -33,6 +33,7 @@ import AddCategory from "./admin/AddCategory";
 import EditCategory from "./admin/EditCategory";
 import BlogManagement from "./admin/BlogManagement";
 import ContactMessages from "./admin/ContactMessages";
+import ManageComments from "./admin/ManageComments";
 
 function App() {
   return (
@@ -167,6 +168,15 @@ function App() {
           element={
             <AdminRoute>
               <ContactMessages />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/comments"
+          element={
+            <AdminRoute>
+              <ManageComments />
             </AdminRoute>
           }
         />

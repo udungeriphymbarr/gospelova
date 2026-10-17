@@ -101,45 +101,51 @@ function Music() {
 
                 return (
                   <article className="music-page__card" key={song.id}>
-                    {coverUrl ? (
-                      <img
-                        src={coverUrl}
-                        alt={`${song.title} cover`}
-                        className="music-page__cover"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        className="music-page__cover-placeholder"
-                        aria-label="No cover art available"
-                      >
-                        <span>♪</span>
+                    <Link
+                      to={`/music/${song.slug}`}
+                      className="music-page__card-link"
+                      aria-label={`View ${song.title}`}
+                    >
+                      {coverUrl ? (
+                        <img
+                          src={coverUrl}
+                          alt={`${song.title} cover`}
+                          className="music-page__cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div
+                          className="music-page__cover-placeholder"
+                          aria-label="No cover art available"
+                        >
+                          <span>♪</span>
+                        </div>
+                      )}
+
+                      {song.categories?.name && (
+                        <span className="music-page__category">
+                          {song.categories.name}
+                        </span>
+                      )}
+
+                      <h2 className="music-page__song-title">{song.title}</h2>
+
+                      <p className="music-page__artist">
+                        By{" "}
+                        {song.artists?.name ||
+                          song.artist_name ||
+                          "Unknown artist"}
+                      </p>
+
+                      <div className="music-page__actions">
+                        <Link
+                          to={`/music/${song.slug}`}
+                          className="music-page__view-link"
+                        >
+                          View Song
+                        </Link>
                       </div>
-                    )}
-
-                    {song.categories?.name && (
-                      <span className="music-page__category">
-                        {song.categories.name}
-                      </span>
-                    )}
-
-                    <h2 className="music-page__song-title">{song.title}</h2>
-
-                    <p className="music-page__artist">
-                      By{" "}
-                      {song.artists?.name ||
-                        song.artist_name ||
-                        "Unknown artist"}
-                    </p>
-
-                    <div className="music-page__actions">
-                      <Link
-                        to={`/music/${song.slug}`}
-                        className="music-page__view-link"
-                      >
-                        View Song
-                      </Link>
-                    </div>
+                    </Link>
                   </article>
                 );
               })}

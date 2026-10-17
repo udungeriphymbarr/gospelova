@@ -105,7 +105,15 @@ function Blog() {
                 const coverUrl = getCoverUrl(post.cover_image_path);
 
                 return (
-                  <article className="music-page__card" key={post.id}>
+                  <article
+                    className="music-page__card gospel-blog-card"
+                    key={post.id}
+                  >
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="gospel-blog-card-link"
+                      aria-label={`Read ${post.title}`}
+                    />
                     {coverUrl ? (
                       <img
                         className="music-page__cover"

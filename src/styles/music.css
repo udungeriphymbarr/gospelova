@@ -535,3 +535,28 @@
   padding-top: 24px;
   border-top: 1px solid #eee8f5;
 }
+
+
+/* Make the entire Gospelova blog card clickable */
+.gospel-blog-card {
+  position: relative;
+}
+
+.gospel-blog-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Keep external source links above the clickable overlay */
+.gospel-blog-source a {
+  position: relative;
+  z-index: 2;
+}
+
+/* Show keyboard focus clearly */
+.gospel-blog-card-link:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}

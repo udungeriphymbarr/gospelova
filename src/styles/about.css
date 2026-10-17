@@ -1,0 +1,139 @@
+
+.about-page {
+  color: #f8f6ff;
+  background: #160d27;
+  min-height: 60vh;
+}
+
+.about-page .container {
+  width: min(1120px, 90%);
+  margin: 0 auto;
+}
+
+.about-hero {
+  padding: 100px 0 90px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, rgba(113, 67, 164, 0.32), transparent 65%),
+    #160d27;
+}
+
+.about-eyebrow {
+  color: #e1bd62;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-hero h1 {
+  max-width: 850px;
+  margin: 20px auto;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 1.1;
+}
+
+.about-hero h1 span {
+  color: #e1bd62;
+}
+
+.about-intro,
+.about-mission p:not(.about-eyebrow),
+.about-founder-copy p:not(.about-eyebrow),
+.about-vision p:not(.about-eyebrow) {
+  color: #d4ccdf;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.about-intro {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.about-mission,
+.about-vision {
+  padding: 75px 0;
+  text-align: center;
+}
+
+.about-mission .container,
+.about-vision .container {
+  max-width: 820px;
+}
+
+.about-mission h2,
+.about-founder h2,
+.about-vision h2 {
+  margin: 14px 0 20px;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.2;
+}
+
+.about-founder {
+  padding: 75px 0;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.about-founder-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 56px;
+}
+
+.about-founder-photo {
+  display: grid;
+  place-items: center;
+  min-height: 380px;
+  padding: 24px;
+  border: 1px dashed rgba(225, 189, 98, 0.65);
+  border-radius: 20px;
+  color: #e1bd62;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: center;
+}
+
+.about-founder-copy h2 {
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .about-hero {
+    padding: 70px 0 60px;
+  }
+
+  .about-mission,
+  .about-founder,
+  .about-vision {
+    padding: 55px 0;
+  }
+
+  .about-founder-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-founder-photo {
+    min-height: 300px;
+  }
+}
+
+.about-founder-photo {
+  overflow: hidden;
+}
+
+.about-founder-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+@media (max-width: 700px) {
+  .about-founder-photo img {
+    min-height: 300px;
+  }
+}

@@ -14,6 +14,7 @@ function Footer() {
           <Link to="/lyrics">Lyrics</Link>
           <Link to="/artists">Artists</Link>
           <Link to="/blog">Gospel News</Link>
+          <Link to="/about">About Gospelova</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/copyright">Copyright</Link>
           <Link to="/privacy">Privacy Policy</Link>

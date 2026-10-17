@@ -9,6 +9,7 @@
 @import "./styles/loading-state.css";
 @import "./styles/privacy.css";
 @import "./styles/Comments.css";
+@import "./styles/about.css";
 
 * {
   margin: 0;

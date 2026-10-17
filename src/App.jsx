@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import Copyright from "./pages/Copyright";
 import SongDetails from "./pages/SongDetails";
 import ArtistDetails from "./pages/ArtistDetails";
+import About from "./pages/About";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import CookieConsent from "./components/CookieConsent";
 
@@ -200,6 +201,7 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/copyright" element={<Copyright />} />
+                <Route path="/about" element={<About />} />
               </Routes>
             </MainLayout>
           }

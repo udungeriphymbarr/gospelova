@@ -548,8 +548,12 @@ function SongDetails() {
 
                         <div className="song-recommendations__info">
                           <h3>{relatedSong.title}</h3>
+
                           <p>
-                            By {relatedSong.artists?.name ?? "Unknown artist"}
+                            By{" "}
+                            {relatedSong.artists?.name ||
+                              relatedSong.artist_name ||
+                              "Unknown artist"}
                           </p>
 
                           {relatedSong.categories?.name && (

@@ -8,7 +8,7 @@ import SEO from "../components/SEO";
 import Comments from "../components/Comments";
 
 function renderArticleContent(content = "") {
-  // Legacy plain text should remain plain text.
+  // Keep legacy plain text as paragraphs.
   if (!/<\/?[a-z][\s\S]*>/i.test(content)) {
     return content
       .split(/\r?\n/)
@@ -158,7 +158,9 @@ function BlogDetails() {
             </article>
           )}
 
-          <Comments targetType="blog" targetId={post.id} />
+          {!loading && post && (
+            <Comments targetType="blog" targetId={post.id} />
+          )}
         </div>
       </section>
     </>

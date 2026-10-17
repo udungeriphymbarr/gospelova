@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase";
 import AudioPlayer from "../components/AudioPlayer";
 import LoadingState from "../components/LoadingState";
 import SEO from "../components/SEO";
+import Comments from "../components/Comments";
 import DOMPurify from "dompurify";
 
 function stripHtml(html = "") {
@@ -509,6 +510,8 @@ function SongDetails() {
               </div>
             )}
           </section>
+
+          <Comments targetType="song" targetId={song.id} />
 
           {/* Recommended songs */}
           {relatedSongs.length > 0 && (

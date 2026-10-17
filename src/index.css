@@ -8,6 +8,7 @@
 @import "./styles/rich-text-editor.css";
 @import "./styles/loading-state.css";
 @import "./styles/privacy.css";
+@import "./styles/Comments.css";
 
 * {
   margin: 0;

@@ -5,6 +5,7 @@ import DOMPurify from "dompurify";
 import "../styles/music.css";
 import LoadingState from "../components/LoadingState";
 import SEO from "../components/SEO";
+import Comments from "../components/Comments";
 
 function renderArticleContent(content = "") {
   // Legacy plain text should remain plain text.
@@ -156,6 +157,8 @@ function BlogDetails() {
               </footer>
             </article>
           )}
+
+          <Comments targetType="blog" targetId={post.id} />
         </div>
       </section>
     </>

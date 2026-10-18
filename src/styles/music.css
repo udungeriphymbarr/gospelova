@@ -560,3 +560,122 @@
   outline: 3px solid #d4af37;
   outline-offset: 3px;
 }
+
+.gospel-blog-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.gospel-blog-card .gospel-blog-description {
+  min-height: 0;
+}
+
+.gospel-blog-card .music-page__view-link {
+  margin-top: auto;
+}
+
+.gospel-blog-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.blog-recommendations {
+  margin: 56px 0 40px;
+}
+
+.blog-recommendations > h2 {
+  margin-bottom: 10px;
+}
+
+.blog-recommendations > p {
+  margin-bottom: 24px;
+  color: #cfc6dc;
+}
+
+.blog-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.blog-recommendations__card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(225, 189, 98, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.blog-recommendations__link {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-recommendations__link img,
+.blog-recommendations__placeholder {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.blog-recommendations__placeholder {
+  display: grid;
+  place-items: center;
+  background: #26163d;
+  color: #e1bd62;
+}
+
+.blog-recommendations__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.blog-recommendations__info h3 {
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.blog-recommendations__info p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  margin: 0 0 18px;
+  color: #cfc6dc;
+  line-height: 1.6;
+}
+
+.blog-recommendations__info span {
+  margin-top: auto;
+  color: #e1bd62;
+  font-weight: 600;
+}
+
+.blog-recommendations__link:focus-visible {
+  outline: 3px solid #e1bd62;
+  outline-offset: -3px;
+}
+
+@media (max-width: 760px) {
+  .blog-recommendations__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-recommendations__grid {
+    grid-template-columns: 1fr;
+  }
+}

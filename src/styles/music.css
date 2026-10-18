@@ -422,9 +422,14 @@
 }
 
 .gospel-blog-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   margin: 0 0 18px;
   color: #6d6577;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 .gospel-blog-source {
@@ -538,9 +543,6 @@
 
 
 /* Make the entire Gospelova blog card clickable */
-.gospel-blog-card {
-  position: relative;
-}
 
 .gospel-blog-card-link {
   position: absolute;
@@ -562,9 +564,11 @@
 }
 
 .gospel-blog-card {
-  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-width: 0;
 }
 
 .gospel-blog-card .gospel-blog-description {
@@ -575,12 +579,14 @@
   margin-top: auto;
 }
 
+/* Keep blog card descriptions compact */
 .gospel-blog-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+  line-height: 1.5;
 }
 
 .blog-recommendations {
@@ -678,4 +684,34 @@
   .blog-recommendations__grid {
     grid-template-columns: 1fr;
   }
+}
+.blog-recommendations__card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(225, 189, 98, 0.35);
+  border-radius: 16px;
+  background: #211432;
+}
+
+.blog-recommendations__info h3 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.blog-recommendations__info p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  margin: 0 0 18px;
+  color: #e5e0ed;
+  line-height: 1.5;
+}
+
+.blog-recommendations__info span {
+  margin-top: auto;
+  color: #e1bd62;
+  font-weight: 600;
 }

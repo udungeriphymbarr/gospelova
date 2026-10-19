@@ -21,6 +21,17 @@
       "destination": "/api/song-preview?slug=:slug"
     },
     {
+      "source": "/blog/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(WhatsApp|facebookexternalhit|Facebot|Twitterbot|TelegramBot|Discordbot|Slackbot|LinkedInBot|Pinterest).*"
+        }
+      ],
+      "destination": "/api/blog-preview?slug=:slug"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

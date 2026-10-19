@@ -42,7 +42,10 @@ function Home() {
         `,
         )
         .eq("is_published", true)
-        .order("created_at", { ascending: false })
+        .order("release_date", {
+          ascending: false,
+          nullsFirst: false,
+        })
         .limit(4);
 
       if (error) {

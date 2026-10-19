@@ -29,7 +29,10 @@ function Music() {
         `,
         )
         .eq("is_published", true)
-        .order("created_at", { ascending: false });
+        .order("release_date", {
+          ascending: false,
+          nullsFirst: false,
+        });
 
       if (cancelled) return;
 

@@ -111,8 +111,8 @@ function AddSong() {
       return;
     }
 
-    if (audioFile.size > 20 * 1024 * 1024) {
-      setError("Audio files must be 20 MB or smaller for this MVP form.");
+    if (audioFile.size > 30 * 1024 * 1024) {
+      setError("Audio files must be 30 MB or smaller.");
       return;
     }
 
@@ -365,7 +365,7 @@ function AddSong() {
           required
         />
 
-        <label htmlFor="song-audio">Audio file * (max 20 MB)</label>
+        <label htmlFor="song-audio">Audio file * (max 30 MB)</label>
         <input
           id="song-audio"
           type="file"

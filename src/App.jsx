@@ -19,6 +19,7 @@ import ArtistDetails from "./pages/ArtistDetails";
 import About from "./pages/About";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import CookieConsent from "./components/CookieConsent";
+import MonetagAds from "./components/MonetagAds";
 
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -41,6 +42,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <GoogleAnalytics />
+      <MonetagAds />
       <CookieConsent />
 
       <Routes>

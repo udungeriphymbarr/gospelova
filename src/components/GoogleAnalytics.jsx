@@ -2,16 +2,23 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const CONSENT_KEY = "gospelova_cookie_consent";
+const ADMIN_EXCLUSION_KEY = "gospelova_exclude_analytics";
 
 export default function GoogleAnalytics() {
   const location = useLocation();
 
   useEffect(() => {
-    // Never track admin pages.
+    // Never track admin routes.
     if (location.pathname.startsWith("/admin")) return;
+
+    // Never track this browser when admin exclusion is enabled.
+    if (localStorage.getItem(ADMIN_EXCLUSION_KEY) === "true") return;
 
     function trackPageView() {
       if (typeof window.gtag !== "function") return;
+
+      // Check exclusion again before sending a page view.
+      if (localStorage.getItem(ADMIN_EXCLUSION_KEY) === "true") return;
 
       let consent;
 
@@ -21,7 +28,6 @@ export default function GoogleAnalytics() {
         return;
       }
 
-      // Track only after explicit analytics consent.
       if (!consent || consent.analytics !== true) return;
 
       window.gtag("event", "page_view", {
@@ -33,7 +39,6 @@ export default function GoogleAnalytics() {
 
     trackPageView();
 
-    // Re-check consent when the visitor changes their choice.
     window.addEventListener("gospelova-consent-updated", trackPageView);
 
     return () => {

@@ -296,6 +296,8 @@ function SongDetails() {
     stripHtml(song.description) ||
     `Discover ${song.title} by ${artist} on Gospelova. Listen to the song, download gospel music, and explore the lyrics.`;
 
+  const songCanonicalUrl = `https://gospelova.com/music/${song.slug}`;
+
   const handleSongDownload = async (event) => {
     event.preventDefault();
 
@@ -322,7 +324,7 @@ function SongDetails() {
         title={`${artist} - ${song.title}`}
         description={seoDescription}
         image={coverUrl || undefined}
-        url={`/music/${song.slug}`}
+        url={songCanonicalUrl}
         type="music.song"
         structuredData={{
           "@context": "https://schema.org",
@@ -332,7 +334,7 @@ function SongDetails() {
             "@type": "MusicGroup",
             name: artist,
           },
-          url: `${window.location.origin}/music/${song.slug}`,
+          url: songCanonicalUrl,
           ...(coverUrl && { image: coverUrl }),
           ...(song.release_date && {
             datePublished: song.release_date,

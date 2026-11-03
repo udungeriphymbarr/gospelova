@@ -1,8 +1,18 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const MONETAG_SCRIPT_ID = "gospelova-monetag-script";
-const MONETAG_ZONE_ID = "12113230";
+const MONETAG_ZONES = [
+  {
+    id: "gospelova-monetag-zone-1",
+    zone: "12113230",
+    src: "https://nap5k.com/tag.min.js",
+  },
+  {
+    id: "gospelova-monetag-zone-2",
+    zone: "12181858",
+    src: "https://n6wxm.com/vignette.min.js",
+  },
+];
 
 export default function MonetagAds() {
   const location = useLocation();
@@ -10,24 +20,30 @@ export default function MonetagAds() {
   useEffect(() => {
     // Never load Monetag on admin pages.
     if (location.pathname.startsWith("/admin")) {
-      document.getElementById(MONETAG_SCRIPT_ID)?.remove();
+      MONETAG_ZONES.forEach(({ id }) => {
+        document.getElementById(id)?.remove();
+      });
       return;
     }
 
-    // Avoid adding the script more than once.
-    if (document.getElementById(MONETAG_SCRIPT_ID)) return;
+    // Load each zone only once.
+    MONETAG_ZONES.forEach(({ id, zone, src }) => {
+      if (document.getElementById(id)) return;
 
-    const script = document.createElement("script");
-    script.id = MONETAG_SCRIPT_ID;
-    script.dataset.zone = MONETAG_ZONE_ID;
-    script.src = "https://nap5k.com/tag.min.js";
-    script.async = true;
+      const script = document.createElement("script");
+      script.id = id;
+      script.dataset.zone = zone;
+      script.src = src;
+      script.async = true;
 
-    document.head.appendChild(script);
+      document.head.appendChild(script);
+    });
 
     return () => {
-      // Remove the script when leaving the public website.
-      script.remove();
+      // Remove both scripts when leaving the public website.
+      MONETAG_ZONES.forEach(({ id }) => {
+        document.getElementById(id)?.remove();
+      });
     };
   }, [location.pathname]);
 

@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -11,6 +12,11 @@ const MONETAG_ZONES = [
     id: "gospelova-monetag-zone-2",
     zone: "12181858",
     src: "https://n6wxm.com/vignette.min.js",
+  },
+  {
+    id: "gospelova-monetag-zone-3",
+    zone: "12242594",
+    src: "https://al5sm.com/tag.min.js",
   },
 ];
 
@@ -40,7 +46,7 @@ export default function MonetagAds() {
     });
 
     return () => {
-      // Remove both scripts when leaving the public website.
+      // Remove scripts when leaving public pages.
       MONETAG_ZONES.forEach(({ id }) => {
         document.getElementById(id)?.remove();
       });

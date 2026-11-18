@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -13,11 +12,11 @@ const MONETAG_ZONES = [
     zone: "12181858",
     src: "https://n6wxm.com/vignette.min.js",
   },
-  {
+  /*{
     id: "gospelova-monetag-zone-3",
     zone: "12242594",
     src: "https://al5sm.com/tag.min.js",
-  },
+  }, */
 ];
 
 export default function MonetagAds() {
